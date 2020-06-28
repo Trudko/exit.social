@@ -1,0 +1,28 @@
+{
+  "name": "twitter-exporter",
+  "description": "",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {
+    "yarn": "^1.10.1"
+  },
+  "scripts": {
+    "start": "yarn run-p start:view start:server:dev",
+    "start:view": "cd view && yarn start",
+    "start:server": "cd server && yarn start",
+    "start:server:dev": "cd server && yarn start:dev",
+    "postinstall": "yarn run-s install:*",
+    "install:view": "cd view && yarn",
+    "install:server": "cd server && yarn",
+    "install:cli": "cd cli && yarn",
+    "add:view": "cd view && yarn add",
+    "add:server": "cd server && yarn add",
+    "remove:view": "cd view && yarn remove",
+    "remove:server": "cd server && yarn remove"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {}
+}

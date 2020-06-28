@@ -1,0 +1,48 @@
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: Nunito;
+  font-size: 16px;
+}
+
+button {
+  appearance: none;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+a {
+  color: #4aa0eb;
+  text-decoration: none;
+}
+
+input {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+input:focus {
+  outline: none;
+}

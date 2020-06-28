@@ -1,0 +1,11 @@
+import styled from 'styled-components'
+
+export const Wrapper = styled.div`
+  background: ${p => p.theme.colors.softGray};
+  width: 100%;
+  position: relative;
+  `
+
+export const Text = styled.div`
+  font-size: 12px;
+`

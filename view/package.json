@@ -1,0 +1,61 @@
+{
+  "name": "twitter-exporter-view",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.0.0-rc.8",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/react-table": "^7.0.19",
+    "@types/styled-components": "^5.1.0",
+    "apollo-link-rest": "^0.8.0-beta.0",
+    "graphql": "^15.1.0",
+    "graphql-anywhere": "^4.2.7",
+    "polished": "^3.6.5",
+    "react": "^16.13.1",
+    "react-csv": "^2.0.3",
+    "react-dom": "^16.13.1",
+    "react-inlinesvg": "^2.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-table": "^7.2.1",
+    "styled-components": "^5.1.1",
+    "typescript": "~3.7.2",
+    "web3": "^1.2.9"
+  },
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "start": "react-scripts start",
+    "start:dev": "npm run start",
+    "check": "echo 'DONE'",
+    "build": "react-scripts build",
+    "test": "react-scripts test --passWithNoTests",
+    "eject": "react-scripts eject",
+    "package": "cd build/ && bestzip ${DEST_DIR:=..}/$npm_package_name-${VERSION:=$npm_package_version}.zip *"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "bestzip": "^2.1.5",
+    "react-hooks-lib": "^0.2.0"
+  }
+}
