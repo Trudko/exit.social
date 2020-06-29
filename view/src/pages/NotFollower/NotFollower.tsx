@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 
 import SESSION_QUERY from 'apollo/queries/session'
 import { SessionInterface } from 'types/users'
-import { Loading, ShareLink } from 'ui'
+import { Loading, Button } from 'ui'
 
 import * as S from './styled'
 
@@ -14,7 +14,7 @@ type RouteParams = {
 
 const NotFollower = () => {
   const params = useParams<RouteParams>()
-  const { data, loading } = useQuery<SessionInterface>(SESSION_QUERY)
+  const { loading } = useQuery<SessionInterface>(SESSION_QUERY)
 
   return loading ? (
     <Loading />
@@ -22,8 +22,17 @@ const NotFollower = () => {
     <S.Wrapper>
       <S.Title>You are not a follower</S.Title>
       <S.Description>
-        Only existing followers can join. Please follow the <a href={`https://www.twitter.com/${params.userName}`}>{params.userName}</a> on Twitter.
+        Only existing followers can join. Please follow{' '}
+        <a
+          href={`https://www.twitter.com/${params.userName}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @{params.userName}
+        </a>{' '}
+        on Twitter.
       </S.Description>
+      <Button to={`/follow/${params.userName}`}>Try again</Button>
     </S.Wrapper>
   )
 }
