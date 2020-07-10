@@ -190,6 +190,15 @@ export class UserService {
         }
     }
 
+    async updateSettings(influencerID: string, message: string) {
+        const foo = await this.influencerModel.updateOne(
+            {
+                username: influencerID,
+            },
+            {$set: {'message': message}}
+        );
+    }
+
     private async payoutFollower(influencerID: string, payout: Payout) {
         //TODO: handle after transaction completes
 

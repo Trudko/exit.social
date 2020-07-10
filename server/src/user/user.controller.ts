@@ -4,6 +4,7 @@ import {ConfigService} from 'config/config.service';
 import {AuthenticatedGuard} from 'auth/guards/authenticated.guard';
 import {User} from 'auth/decorator/user.decorator';
 import {FollowerData} from 'user/model/follower.data';
+import {Settings} from 'user/model/settings';
 import {Payout} from 'user/model/payout';
 
 @Controller()
@@ -66,6 +67,18 @@ export class UserController {
             ...query
         };
         res.redirect(`${this.configService.apiPrefix}/auth/twitter`);
+    }
+
+    @Put('influencers/:id/settings')
+    @HttpCode(204)
+    @UseGuards(AuthenticatedGuard)
+    async influencerSettings(@Param('id') influencerID: string, @Body() settings: Settings) {
+        const influencer = await this.userService.getInfluencer(influencerID);
+        if (!influencer) {
+            throw new NotFoundException();
+        }
+
+        await this.userService.updateSettings(influencerID, settings.message);
     }
 
     @Put('influencers/:id/myself')
