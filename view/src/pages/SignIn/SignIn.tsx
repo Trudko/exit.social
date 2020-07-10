@@ -10,9 +10,11 @@ const SignIn = () => {
       <S.Title>exit.social</S.Title>
       <S.Description>
         Welcome to Exit Social - Exit Portal for social networks.
-   
       </S.Description>
-      <Button outsideRedirect to={`${process.env.REACT_APP_API_URL}/auth/twitter`}>
+      <Button
+        externalRedirect
+        to={`${process.env.REACT_APP_API_URL}/auth/twitter`}
+      >
         <img src="/icons/twitter.svg" alt="Twitter" />
         Sign In Via Twitter
       </Button>

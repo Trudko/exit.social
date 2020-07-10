@@ -56,7 +56,7 @@ const ShareLink = ({
       )}
       {withButton && (
         <Button
-          outsideRedirect
+          externalRedirect
           openNewTab
           to={
             link ||

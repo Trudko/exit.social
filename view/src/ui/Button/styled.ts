@@ -29,15 +29,18 @@ const secondaryStyles = css`
 `
 
 export const Wrapper = styled.button<{
+  fluid?: boolean
   disabled?: boolean
   buttonTheme: Theme
 }>`
+  width: ${p => p.fluid && '100%'};
   padding: 8px 20px;
   border-radius: 100px;
   line-height: 24px;
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &:disabled {
     opacity: 0.8;
