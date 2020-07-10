@@ -13,21 +13,33 @@ const MainLayout = ({ children }: Props) => {
   const history = useHistory()
   const { pathname } = useLocation()
 
-  console.log(pathname)
-
   return (
     <S.Wrapper>
       <S.Header>
         <strong>exit.social</strong>
         <S.NavigationItems>
-          <S.NavigationItem active={pathname === '/dashboard'} onClick={() => history.push('/dashboard')}>
+          <S.NavigationItem
+            active={pathname === '/dashboard'}
+            onClick={() => history.push('/dashboard')}
+          >
             My followers
           </S.NavigationItem>
-          <S.NavigationItem active={pathname === '/payout'} onClick={() => history.push('/payout')}>
+          <S.NavigationItem
+            active={pathname === '/payout'}
+            onClick={() => history.push('/payout')}
+          >
             Rewards payout
           </S.NavigationItem>
         </S.NavigationItems>
-        <HeaderActions/>
+        <HeaderActions
+          items={[
+            {
+              icon: '/icons/settings.svg',
+              text: 'Settings',
+              onClick: () => history.push('/settings')
+            }
+          ]}
+        />
       </S.Header>
       {children}
     </S.Wrapper>

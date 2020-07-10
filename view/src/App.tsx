@@ -12,17 +12,16 @@ import { AuthProvider } from 'contexts'
 
 import 'styles/global.css'
 
-
 declare global {
   interface Window {
-      ethereum: any;
-      web3: any;
+    ethereum: any
+    web3: any
   }
 }
 
 const App = () => {
-  const { pathname } = useLocation()
   const history = useHistory()
+  const { pathname } = useLocation()
   const { data, loading, refetch } = useQuery<SessionInterface>(SESSION_QUERY)
 
   useDidUpdate(() => {
@@ -30,16 +29,17 @@ const App = () => {
   }, [pathname])
 
   useDidUpdate(() => {
-    if (
-      !loading &&
-      !pathname.includes('api') &&
-      !pathname.includes('follow') &&
-      !pathname.includes('leaderboard')
-    ) {
-      if (data) {
-        history.replace('/dashboard')
-      } else {
-        history.replace('/')
+    if (!loading) {
+      if (
+        !pathname.includes('api') &&
+        !pathname.includes('follow') &&
+        !pathname.includes('leaderboard')
+      ) {
+        if (data) {
+          if (!pathname.includes('settings')) history.replace('/dashboard')
+        } else {
+          history.replace('/')
+        }
       }
     }
   }, [loading])

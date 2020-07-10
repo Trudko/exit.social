@@ -11,12 +11,13 @@ type ButtonType = 'button' | 'submit' | 'reset' | undefined
 export type Theme = typeof ButtonThemes[number]
 
 type Props = {
+  fluid?: boolean
   type?: ButtonType
   buttonTheme?: Theme
   disabled?: boolean
   onClick?: () => void
   to?: string
-  outsideRedirect?: boolean
+  externalRedirect?: boolean
   openNewTab?: boolean
   children: React.ReactNode[] | React.ReactNode | string
   className?: string
@@ -24,12 +25,13 @@ type Props = {
 }
 
 const Button = ({
+  fluid,
   type,
   buttonTheme = 'primary',
   disabled,
   onClick,
   to,
-  outsideRedirect,
+  externalRedirect,
   openNewTab,
   children,
   className = '',
@@ -41,7 +43,7 @@ const Button = ({
     if (onClick) {
       onClick()
     } else if (to) {
-      if (outsideRedirect) {
+      if (externalRedirect) {
         if (openNewTab) {
           window.open(to, '_blank', 'noopener noreferrer')
         } else {
@@ -55,6 +57,7 @@ const Button = ({
 
   return (
     <S.Wrapper
+      fluid={fluid}
       type={type}
       buttonTheme={ButtonThemes.includes(buttonTheme) ? buttonTheme : 'primary'}
       disabled={disabled}

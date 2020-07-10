@@ -6,7 +6,8 @@ import {
   FollowSuccess,
   Leaderboard,
   NotFollower,
-  Payout
+  Payout,
+  Settings
 } from 'pages'
 
 export default [
@@ -52,6 +53,11 @@ export default [
         path: '/payout',
         exact: true,
         component: Payout
+      },
+      {
+        path: '/settings',
+        exact: true,
+        component: Settings
       }
     ]
   },
