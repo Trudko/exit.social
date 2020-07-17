@@ -10,6 +10,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100px;
 `
 
 export const Title = styled.div`
