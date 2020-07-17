@@ -1,4 +1,4 @@
-import {Controller, Get, Res, Session, UnauthorizedException, UseGuards} from '@nestjs/common';
+import {Controller, Get, Res, Req, Session, UnauthorizedException, UseGuards, HttpCode} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import {ConfigService} from 'config/config.service';
 import {UserService} from 'user/user.service';
@@ -33,5 +33,11 @@ export class AuthController {
         const redirectURL = session.redirectURL || `${this.configService.viewBaseURL}/dashboard`;
         session.redirectURL = undefined;
         res.redirect(redirectURL);
+    }
+    
+    @Get('/signout')
+    signout(@Req() req, @Res() res) {
+        req.logout();
+        res.send("ok")
     }
 }

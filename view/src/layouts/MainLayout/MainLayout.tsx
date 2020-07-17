@@ -37,6 +37,12 @@ const MainLayout = ({ children }: Props) => {
               icon: '/icons/settings.svg',
               text: 'Settings',
               onClick: () => history.push('/settings')
+            }, {
+              icon: '/icons/log-off.svg',
+              text: 'Signout',
+              onClick: async () =>  {
+              
+              }
             }
           ]}
         />
