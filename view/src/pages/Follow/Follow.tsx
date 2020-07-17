@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/client'
 
 import INFLUENCER_QUERY from 'apollo/queries/influencer'
 import { InfluencerInterface } from 'types/users'
-import { Loading, Button } from 'ui'
+import { Loading, Button, InfluencerPicture } from 'ui'
 
 import * as S from './styled'
 
@@ -58,7 +58,7 @@ const Follow = () => {
       ) : (
         <>
           {data?.influencer?.photoURL && (
-            <img src={data.influencer.photoURL} alt="" />
+            <InfluencerPicture src={data.influencer.photoURL}/>
           )}
           <S.Title>Hi!</S.Title>
           {data?.influencer?.message && (

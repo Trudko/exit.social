@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 
 import LEADERBOARD_QUERY from 'apollo/queries/leaderboard'
 import { LeaderboardInterface } from 'types/leaderboard'
-import { Input, Loading } from 'ui'
+import { Input, Loading, InfluencerPicture} from 'ui'
 import { LeadersTable } from 'components'
 
 import * as S from './styled'
@@ -33,14 +33,17 @@ const Leaderboard = () => {
         <Loading />
       ) : (
         <>
+          {data?.leaderboard?.influencer?.photoURL && (
+            <InfluencerPicture src={data?.leaderboard?.influencer.photoURL}/>
+          )}
           <S.Title>Supporters leaderboard</S.Title>
           <S.SubTitle>
-            Help your influencer move to another platform and get rewards
+            Top community members
           </S.SubTitle>
           <S.SearchInputWrapper>
             <Input
               icon="/icons/search.svg"
-              placeholder="Search your Twitter handle"
+              placeholder="Search By Twitter handle"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
             />

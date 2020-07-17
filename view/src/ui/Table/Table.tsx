@@ -123,7 +123,7 @@ const Table = ({ className = '', style, columns, tableData, entityName, searchCo
         })
       ) : (
         <tr>
-          <td colSpan={columns.length}>No converted {entityName}.</td>
+          <td colSpan={columns.length}>No {entityName}</td>
         </tr>
       )}
       {/* Empty row to divide table body and table footer */}
