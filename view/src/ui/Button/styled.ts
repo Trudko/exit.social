@@ -20,11 +20,11 @@ const secondaryStyles = css`
 
   color: ${p => p.theme.colors.black};
   background: ${p => p.theme.colors.gray};
-  box-shadow: 0px 4px 16px ${p => transparentize(0.8, p.theme.colors.gray)};
+  box-shadow: 0px 4px 16px ${p => transparentize(0.8, p.theme.colors.darkGray)};
   transition: box-shadow 0.3s;
 
   &:not(:disabled):hover {
-    box-shadow: 0px 4px 24px ${p => transparentize(0.1, p.theme.colors.gray)};
+    box-shadow: 0px 4px 24px ${p => transparentize(0.1, p.theme.colors.darkGray)};
   }
 `
 
@@ -43,7 +43,7 @@ export const Wrapper = styled.button<{
   justify-content: center;
 
   &:disabled {
-    opacity: 0.8;
+    opacity: 0.3;
     filter: grayscale(1);
     cursor: default;
   }
