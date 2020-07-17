@@ -41,8 +41,13 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
             <CSVLink
               data={data.followers.values}
               filename="exit-social_export.csv"
+              onClick={() => {
+                if (data.followers?.values.length === 0) {
+                 return false; 
+                }
+              }}
             >
-              <Button buttonTheme="secondary">
+              <Button buttonTheme="secondary" disabled={data.followers?.values.length === 0}>
                 <img src="/icons/export.svg" alt="Link" />
                 Export
               </Button>
