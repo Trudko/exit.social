@@ -4,7 +4,8 @@ export const Wrapper = styled.div`
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-top: 150px;
+  flex-direction: column;
 
   > div {
     textarea {
@@ -16,4 +17,13 @@ export const Wrapper = styled.div`
       margin-top: 24px;
     }
   }
+`
+
+export const Title = styled.div`
+  ${p => p.theme.fonts.h2};
+  text-align: center;
+`
+
+export const Settings = styled.div`
+  margin-top: 30px;
 `
