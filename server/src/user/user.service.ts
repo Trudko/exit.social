@@ -28,15 +28,20 @@ export class UserService {
         const username = twitterProfile.screen_name;
         const normalPicture = twitterProfile.profile_image_url_https.split("_normal");
         let fullProfilePicture = normalPicture[0] + normalPicture[1];
-       
+        const existingInfluencer = await this.influencerModel.findOne(
+            {username}
+        );
+
+        const message = existingInfluencer ? existingInfluencer.message : 
+        `I would like you to join my new community. Please type your contact email.
+        You can also insert your Ethereum wallet, for payouts for inviting new members to the community.
+        You'll get the link, once you validate via Twitter.`;
+      
         const influencer = {
             username,
             followersCount: twitterProfile.followers_count,
             photoURL: fullProfilePicture,
-            message: `
-            I would like you to join my new community. Please type your contact email.
-            You can also insert your Ethereum wallet, for payouts for inviting new members to the community.
-            You'll get the link, once you validate via Twitter.`,
+            message: message,
             token,
             tokenSecret
         } as InfluencerDocument;
