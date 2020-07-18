@@ -1,5 +1,7 @@
 import React from 'react'
 import { useLocation, useHistory } from 'react-router'
+import { useMutation } from '@apollo/client'
+import SIGNOUT_MUTATION from 'apollo/mutations/signout'
 
 import { HeaderActions } from 'components'
 
@@ -12,6 +14,7 @@ type Props = {
 const MainLayout = ({ children }: Props) => {
   const history = useHistory()
   const { pathname } = useLocation()
+  const [signOut] = useMutation(SIGNOUT_MUTATION);
 
   return (
     <S.Wrapper>
@@ -41,7 +44,8 @@ const MainLayout = ({ children }: Props) => {
               icon: '/icons/log-off.svg',
               text: 'Signout',
               onClick: async () =>  {
-              
+                signOut()
+                history.push("/")
               }
             }
           ]}

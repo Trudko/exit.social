@@ -36,8 +36,10 @@ export class AuthController {
     }
     
     @Get('/signout')
+    @HttpCode(204)
     signout(@Req() req, @Res() res) {
-        req.logout();
-        res.send("ok")
+        req.session.destroy( () => {
+           res.end();
+        });
     }
 }
