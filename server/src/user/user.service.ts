@@ -31,17 +31,11 @@ export class UserService {
         const existingInfluencer = await this.influencerModel.findOne(
             {username}
         );
-
-        const message = existingInfluencer ? existingInfluencer.message : 
-        `I would like you to join my new community. Please type your contact email.
-        You can also insert your Ethereum wallet, for payouts for inviting new members to the community.
-        You'll get the link, once you validate via Twitter.`;
       
         const influencer = {
             username,
             followersCount: twitterProfile.followers_count,
             photoURL: fullProfilePicture,
-            message: message,
             token,
             tokenSecret
         } as InfluencerDocument;
@@ -133,13 +127,14 @@ export class UserService {
             return null;
         }
 
-        const {photoURL, message, followersCount} = influencer;
+        const {photoURL, message, followersCount, onboarded} = influencer;
 
         return {
             username,
             photoURL,
             message,
-            followersCount
+            followersCount,
+            onboarded
         };
     }
 
@@ -195,12 +190,15 @@ export class UserService {
         }
     }
 
-    async updateSettings(influencerID: string, message: string) {
-        const foo = await this.influencerModel.updateOne(
+    async updateSettings(influencerID: string, message: string, onboarded: boolean) {
+        await this.influencerModel.updateOne(
             {
                 username: influencerID,
             },
-            {$set: {'message': message}}
+            {$set: {
+                'message': message,
+                'onboarded': onboarded
+            }}
         );
     }
 
