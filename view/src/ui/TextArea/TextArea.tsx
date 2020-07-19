@@ -12,6 +12,7 @@ type Props = {
   onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
   invalid?: boolean
   className?: string
+  disabled?: boolean
   style?: CSS.Properties
 }
 
@@ -24,6 +25,7 @@ const TextArea = ({
   onChange,
   invalid,
   className = '',
+  disabled = false,
   style
 }: Props) => (
   <S.Wrapper className={className} style={style}>
@@ -35,6 +37,7 @@ const TextArea = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
     </S.Value>
   </S.Wrapper>

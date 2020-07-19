@@ -10,9 +10,11 @@ import * as S from './styled'
 const Settings = () => {
   const { user } = useContext(AuthContext)
   const [message, setMessage] = useState<string>('')
+  const [formChanged, setFormChanged] = useState<boolean>(false)
   const [notification, setNotification] = useState({
     show: false,
-    type: NotificationType.Success
+    type: NotificationType.Success,
+    id: message
   });
 
   const [saveSettings, {loading}] = useMutation(
@@ -21,10 +23,14 @@ const Settings = () => {
       onCompleted() {
         setNotification({
           show: true,
-          type: NotificationType.Success
+          type: NotificationType.Success,
+          id: message
         });
+
+        setFormChanged(false);
       }
   });
+
 
   useEffect(() => {
     if (user?.message) setMessage(user.message)
@@ -32,7 +38,7 @@ const Settings = () => {
 
   return (
     <S.Wrapper>
-        { notification.show && <Notification type={notification.type} text="Settings was saved" />}
+        { notification.show && <Notification type={notification.type} id={notification.id} text="Settings was saved" onClose={() => setNotification({...notification, show: false})} />}
         <S.Title>Settings</S.Title>
         <S.Settings>
           <TextArea
@@ -40,11 +46,12 @@ const Settings = () => {
             label="Message for your followers"
             placeholder="This message will be shown to anyone who opens your invite link. Explain why they should give you email address."
             value={message}
-            onChange={e => setMessage(e.target.value)}
+            onChange={e => {setFormChanged(true); setMessage(e.target.value)}}
+            disabled={loading}
           />
           <Button
             fluid
-            disabled={loading}
+            disabled={!formChanged || loading}
             onClick={async () => {
               await saveSettings({
                 variables: {

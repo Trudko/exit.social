@@ -12,18 +12,22 @@ export enum NotificationType {
 
 type Props = {
     text: string,
-    type: NotificationType
+    id?: string,
+    type: NotificationType,
+    onClose?: () => void,
 }
 
-const Notification = ({text, type}: Props) => {
+const Notification = ({text, id, type, onClose}: Props) => {
     useEffect(() => {
         if (type === NotificationType.Success) {
             toast.success(text, {
-                toastId: text
+                toastId: id || text,
+                onClose: onClose || undefined
             });
         } else if (type === NotificationType.Error) {
             toast.error(text, {
-                toastId: text
+                toastId: id || text,
+                onClose: onClose || undefined
             });
         }
     });
