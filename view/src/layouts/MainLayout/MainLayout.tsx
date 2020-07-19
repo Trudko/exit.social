@@ -22,7 +22,11 @@ const MainLayout = ({ children }: Props) => {
   return (
     <S.Wrapper>
       <S.Header>
-        <strong>exit.social</strong>
+        <S.Logo
+         onClick={() => history.push('/dashboard')}
+        >
+          exit.social
+        </S.Logo>
         <S.NavigationItems>
           <S.NavigationItem
             active={pathname === '/dashboard'}
