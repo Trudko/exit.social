@@ -26,11 +26,8 @@ export class UserService {
 
     async saveInfluencer(twitterProfile, token, tokenSecret) {
         const username = twitterProfile.screen_name;
-        const normalPicture = twitterProfile.profile_image_url_https.split("_normal");
-        let fullProfilePicture = normalPicture[0] + normalPicture[1];
-        const existingInfluencer = await this.influencerModel.findOne(
-            {username}
-        );
+        const normalPicture = twitterProfile.profile_image_url_https.split('_normal');
+        const fullProfilePicture = normalPicture[0] + normalPicture[1];
       
         const influencer = {
             username,
@@ -64,7 +61,7 @@ export class UserService {
             ethAddress,
             verified: twitterProfile.verified,
             score: twitterProfile.followers_count,
-            payoutScore: twitterProfile.followers_count,
+            payoutScore: twitterProfile.followers_count
         } as FollowerDocument;
 
         const client = new Twitter({
@@ -97,7 +94,7 @@ export class UserService {
         if (influencerDocument.followers.some(follower => follower.username == followerUsername)) {
             return FollowResult.AlreadyFollower;
         }
-        console.log(follower)
+    
         await influencerDocument.update({
             $push: {
                 followers: follower
@@ -193,7 +190,7 @@ export class UserService {
     async updateSettings(influencerID: string, message: string, onboarded: boolean) {
         await this.influencerModel.updateOne(
             {
-                username: influencerID,
+                username: influencerID
             },
             {$set: {
                 'message': message,

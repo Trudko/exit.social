@@ -34,12 +34,12 @@ export class AuthController {
         session.redirectURL = undefined;
         res.redirect(redirectURL);
     }
-    
+  
     @Get('/signout')
     @HttpCode(204)
     signout(@Req() req, @Res() res) {
         req.session.destroy( () => {
-           res.end();
+            res.end();
         });
     }
 }
