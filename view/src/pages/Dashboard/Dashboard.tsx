@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 
 import FOLLOWERS_QUERY from 'apollo/queries/followers'
 import { FollowersInterface } from 'types/followers'
-import { DashboardStats, DashboardContent } from 'components'
+import { DashboardStats, DashboardContent, DashboardEmpty } from 'components'
 import { Loading } from 'ui'
 
 import * as S from './styled'
@@ -16,10 +16,17 @@ const Dashboard = () => {
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <DashboardStats data={data} />
-          <DashboardContent data={data} />
-        </>
+     
+          data.followers.values.length === 0 ?
+            <DashboardEmpty
+              description="You'll see information about your followers here."
+            />
+          :
+            <>
+              <DashboardStats data={data} />
+              <DashboardContent data={data} />
+            </>
+    
       )}
     </S.Wrapper>
   )

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { useLocation, useHistory } from 'react-router'
+
+import { AuthContext } from 'contexts'
 import { useMutation } from '@apollo/client'
 import SIGNOUT_MUTATION from 'apollo/mutations/signout'
 
@@ -15,6 +17,7 @@ const MainLayout = ({ children }: Props) => {
   const history = useHistory()
   const { pathname } = useLocation()
   const [signOut] = useMutation(SIGNOUT_MUTATION);
+  const { user } = useContext(AuthContext)
 
   return (
     <S.Wrapper>

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import CSS from 'csstype'
 
 import { FollowersInterface } from 'types/followers'
-import { Button, ShareLink } from 'ui'
+import { Button } from 'ui'
+import {InviteLink} from "components";
 
 import * as S from './styled'
 
@@ -34,17 +35,7 @@ const DashboardStats = ({ data, className = '', style }: Props) => {
           </strong>
         </S.Card>
       </S.Inner>
-      <S.Share>
-        <S.ShareItem visible={!shareLinkVisible}>
-          <Button onClick={() => setShareLinkVisible(true)}>
-            <img src="/icons/link.svg" alt="Link" />
-            Generate Invite Link
-          </Button>
-        </S.ShareItem>
-        <S.ShareItem visible={shareLinkVisible}>
-          <ShareLink withButton label="MY LINK" />
-        </S.ShareItem>
-      </S.Share>
+      <InviteLink/>
     </S.Wrapper>
   )
 }

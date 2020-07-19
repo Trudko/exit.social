@@ -4,9 +4,8 @@ export const Wrapper = styled.div`
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
-  margin-top: 150px;
   flex-direction: column;
-
+  padding-top: 150px;
   > div {
     textarea {
       max-width: 100%;
