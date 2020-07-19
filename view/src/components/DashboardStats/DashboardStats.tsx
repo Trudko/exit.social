@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CSS from 'csstype'
 
 import { FollowersInterface } from 'types/followers'
-import { Button } from 'ui'
 import {InviteLink} from "components";
 
 import * as S from './styled'
@@ -14,7 +13,6 @@ type Props = {
 }
 
 const DashboardStats = ({ data, className = '', style }: Props) => {
-  const [shareLinkVisible, setShareLinkVisible] = useState<boolean>(false)
 
   return (
     <S.Wrapper className={className} style={style}>
