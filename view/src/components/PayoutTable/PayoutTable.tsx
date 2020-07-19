@@ -88,7 +88,11 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
 
   return (
     <S.Wrapper>
-      <Table tableData={tableData} columns={columns} entityName="followers" />
+      <Table 
+        tableData={tableData}
+        columns={columns}
+        entityName={tableData?.length === 1 ? 'follower' : 'followers'}
+      />
     </S.Wrapper>
   )
 }
