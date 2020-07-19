@@ -18,9 +18,13 @@ type Props = {
 const Notification = ({text, type}: Props) => {
     useEffect(() => {
         if (type === NotificationType.Success) {
-            toast.success(text);
+            toast.success(text, {
+                toastId: text
+            });
         } else if (type === NotificationType.Error) {
-            toast.error(text)
+            toast.error(text, {
+                toastId: text
+            });
         }
     });
 
