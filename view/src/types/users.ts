@@ -3,6 +3,7 @@ export interface UserInterface {
   photoURL: string
   followersCount: number
   message?: string
+  onboarded: boolean
 }
 
 export interface InfluencerInterface {

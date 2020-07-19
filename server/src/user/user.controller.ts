@@ -78,7 +78,7 @@ export class UserController {
             throw new NotFoundException();
         }
 
-        await this.userService.updateSettings(influencerID, settings.message);
+        await this.userService.updateSettings(influencerID, settings.message, settings.onboarded);
     }
 
     @Put('influencers/:id/myself')

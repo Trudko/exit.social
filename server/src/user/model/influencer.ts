@@ -5,4 +5,5 @@ export class Influencer extends User {
     followers?: Follower[];
     followersCount?: number;
     message?: string;
+    onboarded: boolean;
 }

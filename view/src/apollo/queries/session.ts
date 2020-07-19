@@ -9,6 +9,7 @@ export default gql`
       photoURL
       followersCount
       message
+      onboarded
     }
   }
 `

@@ -17,6 +17,8 @@ export class InfluencerDocument extends Document {
     tokenSecret: string;
     @Prop()
     followers: FollowerDocument[];
+    @Prop()
+    onboarded: boolean;
 }
 
 export const InfluencerSchema = new Schema({
@@ -26,6 +28,10 @@ export const InfluencerSchema = new Schema({
     message: String,
     token: String,
     tokenSecret: String,
+    onboarded: {
+        type: Boolean,
+        default: false
+    },
     followers: [
         {
             username: String,
