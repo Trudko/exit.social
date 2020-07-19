@@ -19,7 +19,7 @@ const Payout = () => {
      
           data.followers.values.length === 0 ?
             <DashboardEmpty 
-              description="You'll will be able to reward your followers through metamask."
+              description="You'll will be able to reward your followers through metamask here."
             />
           :
             <PayoutContent/>
