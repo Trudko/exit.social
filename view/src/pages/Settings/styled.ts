@@ -6,14 +6,15 @@ export const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   padding-top: 150px;
-  > div {
-    textarea {
-      max-width: 100%;
-      width: 400px;
+    > div {
+      textarea {
+        max-width: 100%;
+        width: 500px;
     }
 
-    button {
-      margin-top: 24px;
+    > button {
+        margin-top: 48px;
+        width: 220px;
     }
   }
 `
@@ -25,4 +26,8 @@ export const Title = styled.div`
 
 export const Settings = styled.div`
   margin-top: 30px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `

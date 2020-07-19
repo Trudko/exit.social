@@ -64,10 +64,10 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
           <> 
             <img src="/icons/success.svg" alt="Success" />
             <S.Title>Account successfully connected</S.Title>
-            <S.SubTitle>Set message for your followers. You can changed it later in the settings.</S.SubTitle>
+            <S.SubTitle>Set a message for your followers that will be shown to anyone who opens your unique invite link. You can change it later in the settings.</S.SubTitle>
             <TextArea
               id="settings-personalMessage"
-              placeholder="This message will be shown to anyone who opens your invite link. Explain why they should give you email address."
+              placeholder="Craft your message here"
               value={message}
               onChange={e => setMessage(e.target.value)}
               invalid={!messageValid}
@@ -82,10 +82,11 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
           </>
         :
           <>
+            <img src="/icons/followers.svg" alt="Success" />
             <S.Title>You have 0 followers</S.Title>
             <S.SubTitle>{description}</S.SubTitle>
               <S.LinkWrapper>
-                <ShareLink withButton label="Share your invite link" />
+                <ShareLink withButton label="Share your invite link" columnOrientation={true} />
             </S.LinkWrapper>
           </>
         }

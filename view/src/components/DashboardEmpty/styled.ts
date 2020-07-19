@@ -30,7 +30,8 @@ export const SubTitle = styled.div`
   margin-bottom: 32px;
   margin-top: 32px;
   text-align: center;
-  width: 450px;
+  width: 500px;
+  padding: 0 8px
 `
 
 export const Description = styled.div`
@@ -45,12 +46,12 @@ export const Description = styled.div`
 
   textarea {
     max-width: 100%;
-    width: 450px;
+    width: 500px;
   }
 
   > button {
-    margin-top: 24px;
-    width: 450px;
+    margin-top: 48px;
+    width: 220px;
   }
 `
 export const LinkWrapper = styled.div`

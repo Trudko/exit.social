@@ -14,6 +14,7 @@ type Props = {
   value?: string
   link?: string
   className?: string
+  columnOrientation?: boolean,
   style?: CSS.Properties
 }
 
@@ -23,6 +24,7 @@ const ShareLink = ({
   value,
   link,
   className = '',
+  columnOrientation = false,
   style
 }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -36,10 +38,10 @@ const ShareLink = ({
   }
 
   return (
-    <S.Wrapper className={className} style={style}>
-      {label && <S.Label>{label}</S.Label>}
+    <S.Wrapper className={className} style={style} columnOrientation={columnOrientation}>
+      {label && <S.Label columnOrientation={columnOrientation}>{label}</S.Label>}
       {!loading && (
-        <S.Value>
+        <S.Value columnOrientation={columnOrientation}>
           <input
             readOnly
             ref={inputRef}

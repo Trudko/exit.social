@@ -44,7 +44,7 @@ const Settings = () => {
           <TextArea
             id="settings-personalMessage"
             label="Message for your followers"
-            placeholder="This message will be shown to anyone who opens your invite link. Explain why they should give you email address."
+            placeholder="Craft your message here"
             value={message}
             onChange={e => {setFormChanged(true); setMessage(e.target.value)}}
             disabled={loading}
