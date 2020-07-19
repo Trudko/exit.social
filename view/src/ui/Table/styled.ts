@@ -19,8 +19,8 @@ export const Wrapper = styled.table`
 
   td {
     ${p => p.theme.fonts.p2};
-
     background: ${p => p.theme.colors.white};
+    height: 48px;
   }
 
   thead th {

@@ -26,7 +26,7 @@ export const Wrapper = styled.div<{
   }
 
   input {
-    height: 28px;
+    height: 27px;
     min-width: 186px;
     color: ${p => p.theme.colors.black};
     font-size: 14px;
