@@ -3,7 +3,7 @@ import { CSVLink } from 'react-csv'
 import CSS from 'csstype'
 
 import { FollowersInterface } from 'types/followers'
-import { Tabs, Input, Button } from 'ui'
+import { Tabs, Input, Button, ExportIcon } from 'ui'
 import { FollowersTable } from 'components'
 
 import * as S from './styled'
@@ -48,8 +48,8 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
               }}
             >
               <Button buttonTheme="secondary" disabled={data.followers?.values.length === 0}>
-                <img src="/icons/export.svg" alt="Link" />
-                Export
+                <ExportIcon/>
+                <span>Export</span>
               </Button>
             </CSVLink>
           )}

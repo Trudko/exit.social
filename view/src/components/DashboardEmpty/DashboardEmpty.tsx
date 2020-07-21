@@ -6,6 +6,7 @@ import {ShareLink, TextArea, Button } from 'ui'
 import Notification, {NotificationType } from 'ui/Notification'
 import {useMutation } from '@apollo/client'
 import SETTINGS_MUTATION from 'apollo/mutations/settings'
+import {SuccessIcon} from "ui";
 
 import * as S from './styled'
 
@@ -39,7 +40,6 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
 
   const saveMessage = async () => {
     const isMessageValid = message.trim().length > 0;
-    console.log(isMessageValid)
     setMessageValid(isMessageValid);
 
     if (isMessageValid) {
@@ -62,7 +62,7 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
       <S.Description>
         { !user.onboarded && !messageSaved ? 
           <> 
-            <img src="/icons/success.svg" alt="Success" />
+            <SuccessIcon/>
             <S.Title>Account successfully connected</S.Title>
             <S.SubTitle>Set a message for your followers that will be shown to anyone who opens your unique invite link. You can change it later in the settings.</S.SubTitle>
             <TextArea

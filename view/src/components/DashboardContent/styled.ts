@@ -10,4 +10,11 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  button {
+    span {
+      margin-left: 10px;
+    }
+  }
 `
+

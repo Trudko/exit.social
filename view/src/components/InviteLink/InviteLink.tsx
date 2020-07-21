@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ShareLink, Button } from 'ui'
+import {ShareLink, Button, LinkIcon } from 'ui'
 
 import * as S from "./styled";
 
@@ -10,8 +10,8 @@ const InviteLink = () => {
         <S.Share>
             <S.ShareItem visible={!shareLinkVisible} >
             <Button onClick={() => setShareLinkVisible(true)}>
-                <img src="/icons/link.svg" alt="Link" />
-                Generate Invite Link
+                <LinkIcon/>
+                <span>Generate Invite Link</span>
             </Button>
             </S.ShareItem>
             <S.ShareItem visible={shareLinkVisible}>

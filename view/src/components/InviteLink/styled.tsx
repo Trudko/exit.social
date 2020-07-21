@@ -19,4 +19,10 @@ export const ShareItem = styled.div<{
   * {
     white-space: nowrap;
   }
+
+  button {
+    span {
+      margin-left: 10px;
+    }
+  }
 `

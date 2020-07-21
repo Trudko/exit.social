@@ -11,6 +11,12 @@ export const Header = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 100px;
+
+  button {
+    span {
+      margin-left: 10px;
+    }
+  }
 `
 
 export const Title = styled.div`

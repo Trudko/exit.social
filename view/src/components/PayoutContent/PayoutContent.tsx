@@ -5,7 +5,7 @@ import LEADERBOARD_QUERY from 'apollo/queries/leaderboard'
 import CONVERSIONS_QUERY from 'apollo/queries/conversions'
 import PAYOUT_MUTATION from 'apollo/mutations/payout'
 import { LeaderboardInterface } from 'types/leaderboard'
-import { Button, ConfirmDialog, NumberInput, Loading, Tabs } from 'ui'
+import { Button, ConfirmDialog, NumberInput, Loading, Tabs, EthereumIcon } from 'ui'
 import { AuthContext } from 'contexts'
 import { PayoutTable } from 'components'
 import { getETHString, getUSDString } from 'utils/functions'
@@ -132,8 +132,8 @@ const Payout = () => {
           <S.Header>
             <S.Title>Choose users for payout</S.Title>
             <Button onClick={handlePayout} disabled={selected.length === 0}>
-              <img src="/icons/ethereum.svg" alt="ethereum" />
-              Pay reward for selected
+              <EthereumIcon/>
+              <span>Pay reward for selected</span>
             </Button>
           </S.Header>
           <S.Content>
