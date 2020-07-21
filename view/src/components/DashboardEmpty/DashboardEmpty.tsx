@@ -77,16 +77,15 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
                 disabled={loading}
                 onClick={saveMessage}
                 >
-                  {loading ? 'Loading' : 'Save'}
+                  {loading ? 'Loading' : 'Save invite message'}
               </Button>
           </>
         :
           <>
             <img src="/icons/followers.svg" alt="Success" />
-            <S.Title>You have 0 followers</S.Title>
-            <S.SubTitle>{description}</S.SubTitle>
+            <S.GrayTitle>You have 0 followers on this account</S.GrayTitle>
               <S.LinkWrapper>
-                <ShareLink withButton label="Share your invite link" columnOrientation={true} />
+                <ShareLink withButton label="SHARE YOUR INVITE LINK" columnOrientation={true} />
             </S.LinkWrapper>
           </>
         }

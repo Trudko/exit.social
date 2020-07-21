@@ -5,8 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center; 
-  padding-top: 150px;
-
+  justify-content: center;
 
   > img {
     width: 56px;
@@ -25,10 +24,19 @@ export const Title = styled.div`
   text-align: center;
 `
 
+export const GrayTitle = styled.div`
+  ${p => p.theme.fonts.text5};
+  margin-top: 30px;
+  margin-bottom: 32px;
+  text-align: center;
+  color: ${p => p.theme.colors.darkGray};
+  font-weight: bold;
+`
+
 export const SubTitle = styled.div`
   ${p => p.theme.fonts.text5};
   margin-bottom: 32px;
-  margin-top: 32px;
+  margin-top: 16px;
   text-align: center;
   width: 500px;
   padding: 0 8px
@@ -41,17 +49,18 @@ export const Description = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   textarea {
     max-width: 100%;
-    width: 500px;
+    width: 560px;
   }
 
   > button {
     margin-top: 48px;
-    width: 220px;
+    width: 214px;
+    height: 48px;
   }
 `
 export const LinkWrapper = styled.div`
