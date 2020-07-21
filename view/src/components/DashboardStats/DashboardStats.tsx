@@ -2,7 +2,8 @@ import React from 'react'
 import CSS from 'csstype'
 
 import { FollowersInterface } from 'types/followers'
-import {InviteLink} from "components";
+import {InviteLink} from 'components';
+import { round } from 'utils/functions'
 
 import * as S from './styled'
 
@@ -14,6 +15,8 @@ type Props = {
 
 const DashboardStats = ({ data, className = '', style }: Props) => {
 
+  const converted = round((data?.followers?.values?.length / data?.followers?.total)) * 100
+
   return (
     <S.Wrapper className={className} style={style}>
       <S.Inner>
@@ -24,10 +27,7 @@ const DashboardStats = ({ data, className = '', style }: Props) => {
         <S.Card>
           <span>Converted</span>
           <strong>
-            {data?.followers?.values?.length ||
-              0 / data?.followers?.total ||
-              0 ||
-              0}{' '}
+            {converted}
             <span>%</span>
             <small>{data?.followers?.values?.length || 0} Followers</small>
           </strong>

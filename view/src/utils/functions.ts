@@ -13,3 +13,7 @@ export const getETHString = (value: number) =>
             maximumFractionDigits: 4
         })
         .replace(/,/g, " ");
+
+export const round = (num: number, pow: number = 2) => {
+    return Math.round((num + Number.EPSILON) * Math.pow(10, pow)) / Math.pow(10, pow);
+};
