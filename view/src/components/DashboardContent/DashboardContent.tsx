@@ -29,7 +29,7 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
             }
           ]}
         />
-        <div style={{ display: 'flex' }}>
+        <S.TableActions>
           <Input
             icon="/icons/search.svg"
             placeholder="Search by Twitter handle"
@@ -53,7 +53,7 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
               </Button>
             </CSVLink>
           )}
-        </div>
+        </S.TableActions>
       </S.Header>
       <FollowersTable
         tableData={data?.followers?.values}
