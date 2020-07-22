@@ -1,15 +1,20 @@
 import styled from 'styled-components'
+import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.div`
   min-height: 100vh;
 `
 
 export const Header = styled.div`
-  padding: 16px 24px;
+  padding: 16px 12px;
   background: ${p => p.theme.colors.primary};
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media ${mediaQueries.laptop} {
+    padding: 16px 12px;
+  }
  
 `
 export const Logo = styled.div`

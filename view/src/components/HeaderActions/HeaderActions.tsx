@@ -37,7 +37,9 @@ const HeaderActions = ({ items, className = '', style }: Props) => {
   ) : (
     <S.Wrapper ref={ref} className={className} style={style}>
       <S.Button onClick={() => setDropdownVisible(!dropdownVisible)}>
-        @{data?.session?.username || 'Unknown'}
+        <S.Username>
+          @{data?.session?.username || 'Unknown'}
+        </S.Username>
         {data?.session?.photoURL && (
           <S.ProfilePicture src={data.session.photoURL} />
         )}

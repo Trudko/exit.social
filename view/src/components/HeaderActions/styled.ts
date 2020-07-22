@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { transparentize } from 'polished'
+import mediaQueries from "utils/mediaQueries";
 
 export const Wrapper = styled.div`
   position: relative;
@@ -12,15 +13,22 @@ export const Button = styled.button`
   align-items: center;
   cursor: pointer;
 `
+export const Username = styled.div`
+  display: none;
+
+  @media ${mediaQueries.laptop} {
+    display: block;
+  }
+`
 
 export const ProfilePicture = styled.div<{
   src: string
 }>`
-  width: 32px;
-  height: 32px;
-  margin-left: 16px;
-  background: url(${p => p.src}) center / cover no-repeat;
-  border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    background: url(${p => p.src}) center / cover no-repeat;
+    border-radius: 50%;
 `
 
 export const Dropdown = styled.div`
