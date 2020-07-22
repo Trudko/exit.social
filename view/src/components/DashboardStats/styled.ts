@@ -1,11 +1,17 @@
 import styled from 'styled-components'
+import mediaQueries from "utils/mediaQueries";
 
 export const Wrapper = styled.div`
-  padding: 16px 24px;
+  padding: 16px 12px;
   background: ${p => p.theme.colors.white};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  @media ${mediaQueries.laptop} {
+    flex-direction: row;
+  }
 
   img {
     width: 20px;
@@ -19,6 +25,12 @@ export const Wrapper = styled.div`
 
 export const Inner = styled.div`
   display: flex;
+  margin-bottom: 24px;
+
+  @media ${mediaQueries.laptop} {
+    flex-direction: row;
+    margin-bottom: 0px;
+  }
 `
 
 export const Card = styled.div`
