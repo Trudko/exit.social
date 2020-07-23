@@ -55,10 +55,12 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
           )}
         </S.TableActions>
       </S.Header>
-      <FollowersTable
-        tableData={data?.followers?.values}
-        searchQuery={searchQuery}
-      />
+      <S.TableWrapper>
+        <FollowersTable
+          tableData={data?.followers?.values}
+          searchQuery={searchQuery}
+        />
+      </S.TableWrapper>
     </S.Wrapper>
   )
 }

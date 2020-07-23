@@ -63,7 +63,7 @@ const Settings = () => {
               })
             }}
             >
-              {loading ? 'Loading' : 'Save invite message'}
+              {loading ? 'Loading' : 'Save'}
           </Button>
         </S.Settings>
     </S.Wrapper>

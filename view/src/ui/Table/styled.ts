@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.table`
   width: 100%;
@@ -9,8 +10,12 @@ export const Wrapper = styled.table`
 
   th,
   td {
-    padding: 8px 24px;
+    padding: 8px 8px;
     text-align: left;
+
+    @media ${mediaQueries.laptop} {
+      padding: 8px 24px;
+    }
   }
 
   th {

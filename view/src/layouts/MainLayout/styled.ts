@@ -20,8 +20,9 @@ export const Header = styled.div`
 export const Logo = styled.div`
   cursor: pointer;
   ${p => p.theme.fonts.text1};
-    font-size: 20px;
-    font-weight: 800;
+  font-size: 20px;
+  font-weight: 800;
+  margin-right: 20px;
 `;
 
 export const NavigationItems = styled.div`

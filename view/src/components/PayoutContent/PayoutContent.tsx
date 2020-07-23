@@ -137,35 +137,37 @@ const Payout = () => {
             </Button>
           </S.Header>
           <S.Content>
-          <S.PayoutSetup>
-            <Tabs
-            id="dashboard-tabs"
-            items={[
-              {
-                text: 'Users score',
-                href: '/payout'
-              }
-            ]}
-          />
-            <S.Label>1 point = </S.Label>
-            <NumberInput
-              className="pointsValue" 
-              value={pointsValueEth} 
-              onChange={setPointsValueEth} 
-              min={0.000001} 
-              max={10} 
-              maxLength={pointsValueEth.startsWith("0.") ? 8 : 2} 
+            <S.PayoutSetup>
+              <Tabs
+              id="dashboard-tabs"
+              items={[
+                {
+                  text: 'Users score',
+                  href: '/payout'
+                }
+              ]}
             />
-            <S.Label>ETH (${getUSDString(pointsValueUSD, false, 4)})</S.Label>
-          </S.PayoutSetup>
-         
+              <S.PayoutWrapper>
+                <S.Label>1 point = </S.Label>
+                <NumberInput
+                  className="pointsValue" 
+                  value={pointsValueEth} 
+                  onChange={setPointsValueEth} 
+                  min={0.000001} 
+                  max={10} 
+                  maxLength={pointsValueEth.startsWith("0.") ? 8 : 2} 
+                />
+                <S.Label>ETH (${getUSDString(pointsValueUSD, false, 4)})</S.Label>
+                </S.PayoutWrapper>
+            </S.PayoutSetup>
           
-            <PayoutTable
-              tableData={leaderboardData?.leaderboard?.followers.map(
-                toPayoutFollower
-              )}
-              payRewardSelectionChanged={selectionChanged}
-            />
+            
+              <PayoutTable
+                tableData={leaderboardData?.leaderboard?.followers.map(
+                  toPayoutFollower
+                )}
+                payRewardSelectionChanged={selectionChanged}
+              />
           </S.Content>
 
           {confirmDialogVisible && (

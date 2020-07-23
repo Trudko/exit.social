@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { lighten } from 'polished'
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div`
+`
 
 export const Label = styled.label`
   ${p => p.theme.fonts.label};

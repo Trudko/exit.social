@@ -22,9 +22,7 @@ export const Wrapper = styled.div<Props>`
     margin-top: 10px;
     width: 214px;
     
-    @media ${mediaQueries.laptop} {
       margin-top: ${p => p.columnOrientation ? '48px' :  '0'};
-    }
   }
 `
 
@@ -63,7 +61,6 @@ export const Value = styled.div<Props>`
   button {
     color: ${p => p.theme.colors.primary};
     
-
     &:hover {
       opacity: 0.7;
     }

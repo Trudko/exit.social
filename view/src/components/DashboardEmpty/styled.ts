@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.div`
   min-height: calc(100vh - 64px);
@@ -38,8 +39,12 @@ export const SubTitle = styled.div`
   margin-bottom: 32px;
   margin-top: 16px;
   text-align: center;
-  width: 500px;
-  padding: 0 8px
+  padding: 0 8px;
+  width: 100%;
+  
+  @media ${mediaQueries.laptop} {
+    width: 500px;
+  }
 `
 
 export const Description = styled.div`
@@ -51,10 +56,16 @@ export const Description = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding:0 12px;
 
   textarea {
     max-width: 100%;
-    width: 560px;
+    width: 350px;
+
+    @media ${mediaQueries.laptop} {
+      width: 560px;
+    }
   }
 
   > button {

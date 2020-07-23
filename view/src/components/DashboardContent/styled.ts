@@ -2,15 +2,19 @@ import styled from 'styled-components'
 import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.div`
-  padding: 24px;
+  padding: 24px 12px;
   background: ${p => p.theme.colors.softGray};
+
+  @media ${mediaQueries.laptop} { 
+    padding: 24px;
+  }
 `
 
 export const Header = styled.div`
   padding-bottom: 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: skpace-between;
   flex-direction: column;
 
   @media ${mediaQueries.laptop} {
@@ -35,9 +39,17 @@ export const Header = styled.div`
   }
 `
 
+export const TableWrapper = styled.div`
+   overflow: auto;
+`;
+
 export const TableActions = styled.div`
   display: flex;
-  justify-content: center;
   margin-top: 20px;
-  
+  width: 100%;
+
+  @media ${mediaQueries.laptop} {
+    margin-top: 0px;
+    width: initial;
+  }
 `;

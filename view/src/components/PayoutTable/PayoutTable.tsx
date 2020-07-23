@@ -70,10 +70,9 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
         }
       },
       {
-        Header: 'Check for payout',
+        Header: ' ',
         accessor: (props: TableProps) => (
           <Checkbox
-            text="Pay reward"
             disabled={props.payoutScore === 0 || !props.ethAddress}
             value={props.selected}
             onChange={selected =>
