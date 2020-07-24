@@ -10,7 +10,8 @@ export default gql`
       photoURL
       message
       followersCount
-      onboarded
+      onboarded,
+      allowPayout
     }
   }
 `

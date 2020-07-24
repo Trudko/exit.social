@@ -6,4 +6,5 @@ export class Influencer extends User {
     followersCount?: number;
     message?: string;
     onboarded: boolean;
+    allowPayout: boolean;
 }

@@ -17,6 +17,10 @@ export const Wrapper = styled.div`
         }
     }
 
+    input[type=checkbox], .label {
+      margin-top: 48px;
+    }
+
     > button {
         margin-top: 48px;
         width: 220px;

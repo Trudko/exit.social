@@ -3,7 +3,8 @@ export interface UserInterface {
   photoURL: string
   followersCount: number
   message?: string
-  onboarded: boolean
+  onboarded: boolean,
+  allowPayout: boolean
 }
 
 export interface InfluencerInterface {

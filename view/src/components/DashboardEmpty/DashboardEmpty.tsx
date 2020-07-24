@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import CSS from 'csstype'
 
 import { AuthContext } from 'contexts'
-import {ShareLink, TextArea, Button } from 'ui'
+import {ShareLink, TextArea, Button, Checkbox} from 'ui'
 import Notification, {NotificationType } from 'ui/Notification'
 import {useMutation } from '@apollo/client'
 import SETTINGS_MUTATION from 'apollo/mutations/settings'
@@ -21,6 +21,7 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
   const [message, setMessage] = useState<string>('')
   const [messageSaved, setMessageSaved] = useState<boolean>(false)
   const [messageValid, setMessageValid] = useState<boolean>(true)
+  const [allowPayout, setAllowPayout] = useState<boolean>(true)
   const [notification, setNotification] = useState({
     show: false,
     type: NotificationType.Success
@@ -48,7 +49,8 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
           influencerID: user.username,
           settingsData: {
             message: message,
-            onboarded: true
+            onboarded: true,
+            allowPayout: allowPayout
           }
         }
       })
@@ -71,6 +73,11 @@ const DashboardEmpty = ({ description, className = '', style }: Props) => {
               value={message}
               onChange={e => setMessage(e.target.value)}
               invalid={!messageValid}
+            />
+            <Checkbox
+              text="Collect Ethereum Address for payouts"
+              value={allowPayout}
+              onChange={selected => setAllowPayout(!allowPayout)}
             />
             <Button
                 fluid

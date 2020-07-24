@@ -72,12 +72,14 @@ const Follow = () => {
               onChange={e => setForm({ ...form, email: e.target.value })}
               invalid={emailInvalid}
             />
-            <S.FormInput
-              icon="/icons/ethereum.svg"
-              placeholder="Your Ethereum Wallet Address"
-              value={form.ethAddress}
-              onChange={e => setForm({ ...form, ethAddress: e.target.value })}
-            />
+            { data.influencer.allowPayout &&
+              <S.FormInput
+                icon="/icons/ethereum.svg"
+                placeholder="Your Ethereum Wallet Address"
+                value={form.ethAddress}
+                onChange={e => setForm({ ...form, ethAddress: e.target.value })}
+              />
+            }
           </S.Form>
           <Button onClick={handleConfirm}>
             <img src="/icons/twitter.svg" alt="Twitter" />

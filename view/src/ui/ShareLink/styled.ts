@@ -11,6 +11,7 @@ export const Wrapper = styled.div<Props>`
   align-items: center;
   width: 100%;
 
+
   @media ${mediaQueries.laptop} {
     flex-direction: ${p => p.columnOrientation ? 'column' :  'row'};
     align-items: center;
@@ -20,9 +21,9 @@ export const Wrapper = styled.div<Props>`
     margin-left: 8px;
     font-size: 14px;
     margin-top: 10px;
-    width: 214px;
-    
-      margin-top: ${p => p.columnOrientation ? '48px' :  '0'};
+    width: 230px;
+   
+    margin-top: ${p => p.columnOrientation ? '48px' :  '0'};
   }
 `
 

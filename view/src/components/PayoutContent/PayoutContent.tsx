@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react'
-import { useQuery, useMutation } from '@apollo/client'
 
+import { Link} from 'react-router-dom'
+import { useQuery, useMutation } from '@apollo/client'
 import LEADERBOARD_QUERY from 'apollo/queries/leaderboard'
 import CONVERSIONS_QUERY from 'apollo/queries/conversions'
 import PAYOUT_MUTATION from 'apollo/mutations/payout'
@@ -128,6 +129,16 @@ const Payout = () => {
       {leaderboardDataLoading ? (
         <Loading />
       ) : (
+
+        !user.allowPayout ? <S.DisabledPayout>
+          <S.Title>Payouts are disabled</S.Title>
+          <S.SubTitle>
+            Please enable payouts in the <Link to={`/settings/`}> Settings</Link>
+.
+          </S.SubTitle>
+
+        </S.DisabledPayout> :
+
         <>
           <S.Header>
             <S.Title>Choose users for payout</S.Title>

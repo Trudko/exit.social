@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { AuthContext } from 'contexts'
-import { TextArea, Button } from 'ui'
+import { TextArea, Button, Checkbox } from 'ui'
 import Notification, {NotificationType } from 'ui/Notification'
 import SETTINGS_MUTATION from 'apollo/mutations/settings'
 import {useMutation } from '@apollo/client'
@@ -11,6 +11,7 @@ const Settings = () => {
   const { user } = useContext(AuthContext)
   const [message, setMessage] = useState<string>('')
   const [formChanged, setFormChanged] = useState<boolean>(false)
+  const [allowPayout, setAllowPayout] = useState<boolean>(true)
   const [notification, setNotification] = useState({
     show: false,
     type: NotificationType.Success,
@@ -31,9 +32,10 @@ const Settings = () => {
       }
   });
 
-
   useEffect(() => {
     if (user?.message) setMessage(user.message)
+
+    setAllowPayout(user.allowPayout);
   }, [user])
 
   return (
@@ -49,6 +51,11 @@ const Settings = () => {
             onChange={e => {setFormChanged(true); setMessage(e.target.value)}}
             disabled={loading}
           />
+          <Checkbox
+            text="Collect Ethereum Address for payouts"
+            value={allowPayout}
+            onChange={selected => {setFormChanged(true); setAllowPayout(!allowPayout)}}
+          />
           <Button
             fluid
             disabled={!formChanged || loading}
@@ -57,7 +64,8 @@ const Settings = () => {
                 variables: {
                   influencerID: user.username,
                   settingsData: {
-                    message: message
+                    message: message,
+                    allowPayout: allowPayout
                   }
                 }
               })

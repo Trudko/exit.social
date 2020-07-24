@@ -19,6 +19,8 @@ export class InfluencerDocument extends Document {
     followers: FollowerDocument[];
     @Prop()
     onboarded: boolean;
+    @Prop()
+    allowPayout: boolean;
 }
 
 export const InfluencerSchema = new Schema({
@@ -31,6 +33,10 @@ export const InfluencerSchema = new Schema({
     onboarded: {
         type: Boolean,
         default: false
+    },
+    allowPayout: {
+        type: Boolean,
+        default: true
     },
     followers: [
         {

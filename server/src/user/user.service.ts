@@ -9,6 +9,7 @@ import {FollowerData} from 'user/model/follower.data';
 import {Payout} from 'user/model/payout';
 import {InfluencerDocument} from 'user/schemas/influencer-schema';
 import {FollowerDocument} from 'user/schemas/follower-schema';
+import {Settings} from 'user/model/settings';
 
 export enum FollowResult {
     Success = 'success',
@@ -124,14 +125,15 @@ export class UserService {
             return null;
         }
 
-        const {photoURL, message, followersCount, onboarded} = influencer;
+        const {photoURL, message, followersCount, onboarded, allowPayout} = influencer;
 
         return {
             username,
             photoURL,
             message,
             followersCount,
-            onboarded
+            onboarded,
+            allowPayout
         };
     }
 
@@ -187,14 +189,15 @@ export class UserService {
         }
     }
 
-    async updateSettings(influencerID: string, message: string, onboarded: boolean) {
+    async updateSettings(influencerID: string, {message, onboarded, allowPayout}: Settings) {
         await this.influencerModel.updateOne(
             {
                 username: influencerID
             },
             {$set: {
                 'message': message,
-                'onboarded': onboarded
+                'onboarded': onboarded,
+                'allowPayout': allowPayout
             }}
         );
     }

@@ -97,3 +97,16 @@ export const SubInfo = styled.div`
   margin-top: 4px;
   text-align: right;
 `
+
+export const DisabledPayout = styled.div`
+  min-height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SubTitle = styled.div`
+  ${p => p.theme.fonts.text5};
+  margin-top: 30px;
+`
