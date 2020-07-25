@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <ThemeProvider theme={{ colors, fonts }}>
-        <Router>
+        <Router basename={process.env.REACT_APP_VIEW_BASE_URL}>
           <App />
         </Router>
       </ThemeProvider>

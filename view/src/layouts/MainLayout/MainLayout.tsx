@@ -49,8 +49,8 @@ const MainLayout = ({ children }: Props) => {
               icon: '/icons/log-off.svg',
               text: 'Signout',
               onClick: async () =>  {
-                signOut()
-                history.push("/")
+                signOut();
+                window.location.href =  window.location.protocol + "//" + window.location.host;
               }
             }
           ]}

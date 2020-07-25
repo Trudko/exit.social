@@ -11,7 +11,6 @@ export const Wrapper = styled.div<Props>`
   align-items: center;
   width: 100%;
 
-
   @media ${mediaQueries.laptop} {
     flex-direction: ${p => p.columnOrientation ? 'column' :  'row'};
     align-items: center;
@@ -43,7 +42,10 @@ export const Value = styled.div<Props>`
   display: flex;
   align-items: center;
   margin-top: 10px;
-  
+
+  @media ${mediaQueries.laptop} {
+    margin-top: 0px;
+  }  
   > * {
     padding: 8px 16px;
     font-size: 12px;

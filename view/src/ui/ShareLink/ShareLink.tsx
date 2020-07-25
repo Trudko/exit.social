@@ -49,7 +49,7 @@ const ShareLink = ({
             value={
               value ||
               (data?.session?.username
-                ? `${window.location.protocol}//${window.location.host}/follow/${data.session.username}`
+                ? `${window.location.protocol}//${window.location.host}${process.env.REACT_APP_VIEW_BASE_URL}/follow/${data.session.username}`
                 : 'Something went wrong :(')
             }
           />
@@ -64,7 +64,7 @@ const ShareLink = ({
             link ||
             `https://twitter.com/intent/tweet${
               data?.session?.username
-                ? `?text=Hey%20everyone!%20Sign%20up%20for%20${window.location.protocol}//${window.location.host}/follow/${data.session.username}%20if%20you%20want%20to%20support%20me.`
+                ? `?text=Hey%20everyone!%20Sign%20up%20for%20${window.location.protocol}//${window.location.host}${process.env.REACT_APP_VIEW_BASE_URL}/follow/${data.session.username}%20if%20you%20want%20to%20support%20me.`
                 : ''
             }`
           }

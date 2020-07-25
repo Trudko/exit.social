@@ -66,7 +66,7 @@ export class UserController {
             influencer: influencerID,
             ...query
         };
-        res.redirect(`${this.configService.apiPrefix}/auth/twitter`);
+        res.redirect(`${this.configService.serverBaseURL}${this.configService.apiPrefix}/auth/twitter`);
     }
 
     @Put('influencers/:id/settings')

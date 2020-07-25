@@ -31,8 +31,8 @@ const FollowSuccess = () => {
       <S.Label>Your Invite link</S.Label>
       <ShareLink
         withButton
-        value={`${window.location.protocol}//${window.location.host}/follow/${params.userName}?ref=${data?.session?.username}`}
-        link={`https://twitter.com/intent/tweet?text=By%20sharing%20this%20link%20you%20will%20help%20the%20influencer%20to%20migrate%20to%20a%20new%20platform%20with%20new%20%26%20fresh content.%20${window.location.protocol}//${window.location.host}/follow/${params.userName}?ref=${data?.session?.username}`}
+        value={`${window.location.protocol}//${window.location.host}${process.env.REACT_APP_VIEW_BASE_URL}/follow/${params.userName}?ref=${data?.session?.username}`}
+        link={`https://twitter.com/intent/tweet?text=By%20sharing%20this%20link%20you%20will%20help%20the%20influencer%20to%20migrate%20to%20a%20new%20platform%20with%20new%20%26%20fresh content.%20${window.location.protocol}//${window.location.host}${process.env.REACT_APP_VIEW_BASE_URL}/follow/${params.userName}?ref=${data?.session?.username}`}
       />
     </S.Wrapper>
   )
