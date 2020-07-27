@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import mediaQueries from "utils/mediaQueries";
 
 export const Wrapper = styled.div`
-  padding: 16px 12px;
+  padding: 16px;
   background: ${p => p.theme.colors.white};
   display: flex;
   flex-direction: column;
@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 
   @media ${mediaQueries.laptop} {
     flex-direction: row;
+    padding: 16px 24px;
   }
 
   img {
@@ -25,16 +26,18 @@ export const Wrapper = styled.div`
 
 export const Inner = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: space-between;
   margin-bottom: 24px;
 
   @media ${mediaQueries.laptop} {
-    flex-direction: row;
+    width: initial;
     margin-bottom: 0px;
   }
 `
 
 export const Card = styled.div`
-  min-width: 176px;
+  min-width: 156px;
   padding: 10px 16px;
   background: ${p => p.theme.colors.softGray};
   border-radius: 8px;

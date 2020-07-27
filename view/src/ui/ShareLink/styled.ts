@@ -7,11 +7,11 @@ type Props = {
 
 export const Wrapper = styled.div<Props>`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  justify-content: center;
 
   @media ${mediaQueries.laptop} {
+    flex-direction: column;
+    width: 100%;
     flex-direction: ${p => p.columnOrientation ? 'column' :  'row'};
     align-items: center;
   }
@@ -19,15 +19,19 @@ export const Wrapper = styled.div<Props>`
   > button {
     margin-left: 8px;
     font-size: 14px;
-    margin-top: 10px;
-    width: 230px;
-   
     margin-top: ${p => p.columnOrientation ? '48px' :  '0'};
+    padding: 0px;
+    height: 40px;
+
+    @media ${mediaQueries.laptop} {
+      width: 240px;
+      padding: 8px 20px;
+    }
   }
 `
 
 export const Label = styled.div<Props>`
-  margin: ${p => p.columnOrientation ? '16px 0' :  '0 16px'};
+  margin: ${p => p.columnOrientation ? '16px 0 0 0' :  '0 16px'};
   color: ${p => p.theme.colors.darkGray};
   font-size: 12px;
   font-weight: 700;
@@ -41,11 +45,11 @@ export const Value = styled.div<Props>`
   border-radius: 100px;
   display: flex;
   align-items: center;
-  margin-top: 10px;
 
   @media ${mediaQueries.laptop} {
-    margin-top: 0px;
-  }  
+      width: initial;
+  }
+
   > * {
     padding: 8px 16px;
     font-size: 12px;
@@ -59,6 +63,7 @@ export const Value = styled.div<Props>`
     white-space: nowrap;
     text-overflow: ellipsis;
     flex: 1;
+    padding: 10px 16px;
   }
 
   button {
@@ -69,3 +74,7 @@ export const Value = styled.div<Props>`
     }
   }
 `
+
+export const ShareText = styled.div`
+   margin-left: 10px;
+`;

@@ -4,6 +4,11 @@ import mediaQueries from "utils/mediaQueries";
 
 export const Wrapper = styled.div`
   position: relative;
+  order: 2;
+
+  @media ${mediaQueries.laptop} {
+    order: 3;
+  }
 `
 
 export const Button = styled.button`

@@ -31,6 +31,18 @@ type Props = {
 const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
   const columns = useMemo(
     () => [
+      {
+        Header: ' ',
+        accessor: (props: TableProps) => (
+          <Checkbox
+            disabled={props.payoutScore === 0 || !props.ethAddress}
+            value={props.selected}
+            onChange={selected =>
+              payRewardSelectionChanged(props.username, selected)
+            }
+          />
+        )
+      },
       PositionColumn,
       UsernameColumn,
       ScoreColumn,
@@ -68,18 +80,6 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
             )
           }
         }
-      },
-      {
-        Header: ' ',
-        accessor: (props: TableProps) => (
-          <Checkbox
-            disabled={props.payoutScore === 0 || !props.ethAddress}
-            value={props.selected}
-            onChange={selected =>
-              payRewardSelectionChanged(props.username, selected)
-            }
-          />
-        )
       }
     ],
     [payRewardSelectionChanged]

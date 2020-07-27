@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.div`
-  padding: 24px 12px;
+  padding: 16px 16px;
   background: ${p => p.theme.colors.softGray};
 
   @media ${mediaQueries.laptop} { 
@@ -45,6 +45,7 @@ export const TableWrapper = styled.div`
 
 export const TableActions = styled.div`
   display: flex;
+  justify-content: space-between;
   margin-top: 20px;
   width: 100%;
 

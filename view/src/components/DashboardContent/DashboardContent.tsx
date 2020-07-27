@@ -35,7 +35,7 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
             placeholder="Search by Twitter handle"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            style={{ marginRight: '8px' }}
+            style={{ marginRight: '16px', width: '100%' }}
           />
           {data?.followers?.values && (
             <CSVLink

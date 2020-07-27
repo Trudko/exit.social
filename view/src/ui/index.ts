@@ -11,4 +11,4 @@ export { default as ConfirmDialog } from './ConfirmDialog'
 export { default as TextArea } from './TextArea'
 export { default as InfluencerPicture } from './InfluencerPicture'
 export { default as Notification, NotificationType } from './Notification'
-export { SuccessIcon, ExportIcon, EthereumIcon, LinkIcon} from './Icons';
+export { SuccessIcon, ExportIcon, EthereumIcon, LinkIcon, ShareTwitterIcon, ShareTwitterMobileIcon} from './Icons';

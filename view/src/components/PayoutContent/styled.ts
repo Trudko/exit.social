@@ -24,8 +24,13 @@ export const Header = styled.div`
 
   button {
     margin-top: 20px;
+
     span {
       margin-left: 10px;
+    }
+
+    @media ${mediaQueries.laptop} {
+      margin-top: 0px;
     }
   }
 `
@@ -78,7 +83,7 @@ export const Label = styled.div`
 `
 
 export const Content = styled.div`
-  padding: 24px 12px;
+  padding: 16px 16px;
   background: ${p => p.theme.colors.softGray};
 
   @media ${mediaQueries.laptop} {

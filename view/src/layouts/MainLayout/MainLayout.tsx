@@ -25,20 +25,6 @@ const MainLayout = ({ children }: Props) => {
         >
           exit.social
         </S.Logo>
-        <S.NavigationItems>
-          <S.NavigationItem
-            active={pathname === '/dashboard'}
-            onClick={() => history.push('/dashboard')}
-          >
-            My followers
-          </S.NavigationItem>
-          <S.NavigationItem
-            active={pathname === '/payout'}
-            onClick={() => history.push('/payout')}
-          >
-            Rewards payout
-          </S.NavigationItem>
-        </S.NavigationItems>
         <HeaderActions
           items={[
             {
@@ -55,6 +41,20 @@ const MainLayout = ({ children }: Props) => {
             }
           ]}
         />
+        <S.NavigationItems>
+          <S.NavigationItem
+            active={pathname === '/dashboard'}
+            onClick={() => history.push('/dashboard')}
+          >
+            My followers
+          </S.NavigationItem>
+          <S.NavigationItem
+            active={pathname === '/payout'}
+            onClick={() => history.push('/payout')}
+          >
+            Rewards payout
+          </S.NavigationItem>
+        </S.NavigationItems>
       </S.Header>
       {children}
     </S.Wrapper>

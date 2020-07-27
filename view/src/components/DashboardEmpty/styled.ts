@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center; 
   justify-content: center;
+  padding: 40px 24px;
 
   > img {
     width: 56px;
@@ -39,7 +40,6 @@ export const SubTitle = styled.div`
   margin-bottom: 32px;
   margin-top: 16px;
   text-align: center;
-  padding: 0 8px;
   width: 100%;
   
   @media ${mediaQueries.laptop} {
@@ -57,11 +57,10 @@ export const Description = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding:0 12px;
 
   textarea {
     max-width: 100%;
-    width: 350px;
+    width: 320px;
 
     @media ${mediaQueries.laptop} {
       width: 560px;
@@ -69,15 +68,16 @@ export const Description = styled.div`
   }
 
   input[type=checkbox], .label {
-    margin-top: 48px;
+    margin-top: 38px;
   }
 
   > button {
-    margin-top: 48px;
+    margin-top: 38px;
     width: 214px;
     height: 48px;
   }
 `
 export const LinkWrapper = styled.div`
   display: flex;
+  width: 100%;
 `;

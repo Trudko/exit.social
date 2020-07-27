@@ -1,10 +1,12 @@
 import React, { useRef } from 'react'
+
 import { useQuery } from '@apollo/client'
 import CSS from 'csstype'
-
 import SESSION_QUERY from 'apollo/queries/session'
+import { Button, ShareTwitterIcon, ShareTwitterMobileIcon } from 'ui'
+import { useMediaQuery } from 'react-responsive'
+import mediaQueries from "utils/mediaQueries";
 import { SessionInterface } from 'types/users'
-import { Button } from 'ui'
 
 import * as S from './styled'
 
@@ -37,9 +39,11 @@ const ShareLink = ({
     }
   }
 
+  const isMobile = !useMediaQuery({ query: mediaQueries.laptop })
+
   return (
     <S.Wrapper className={className} style={style} columnOrientation={columnOrientation}>
-      {label && <S.Label columnOrientation={columnOrientation}>{label}</S.Label>}
+      {label && !isMobile && <S.Label columnOrientation={columnOrientation}>{label}</S.Label>}
       {!loading && (
         <S.Value columnOrientation={columnOrientation}>
           <input
@@ -69,8 +73,7 @@ const ShareLink = ({
             }`
           }
         >
-          <img src="/icons/twitter.svg" alt="Twitter" />
-          Share on Twitter
+          { isMobile ? <ShareTwitterMobileIcon/> : <> <ShareTwitterIcon/>  <S.ShareText>Share On Twitter</S.ShareText> </>}
         </Button>
       )}
     </S.Wrapper>
