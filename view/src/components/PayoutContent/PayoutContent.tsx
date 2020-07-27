@@ -11,6 +11,9 @@ import { AuthContext } from 'contexts'
 import { PayoutTable } from 'components'
 import { getETHString, getUSDString } from 'utils/functions'
 import { ConversionsInterface } from 'types/conversions'
+import { useMediaQuery } from 'react-responsive'
+import mediaQueries from "utils/mediaQueries";
+
 
 import Web3 from "web3";
 
@@ -123,6 +126,30 @@ const Payout = () => {
     setConfirmDialogVisible(false)
     await refetchLeaderboard()
   }
+
+  const redenderPayoutButton = () => (
+    <Button onClick={handlePayout} disabled={selected.length === 0}>
+      <EthereumIcon/>
+      <span>Pay reward for selected</span>
+    </Button>
+  );
+
+  const renderPayoutPointsSettings = () => (
+    <S.PayoutWrapper>
+      <S.Label>1 point = </S.Label>
+      <NumberInput
+        className="pointsValue" 
+        value={pointsValueEth} 
+        onChange={setPointsValueEth} 
+        min={0.000001} 
+        max={10} 
+        maxLength={pointsValueEth.startsWith("0.") ? 8 : 2} 
+      />
+      <S.Label>ETH (${getUSDString(pointsValueUSD, false, 4)})</S.Label>
+    </S.PayoutWrapper>
+  );
+
+  const isMobile = !useMediaQuery({ query: mediaQueries.laptop })
  
   return (
     <S.Wrapper>
@@ -141,11 +168,15 @@ const Payout = () => {
 
         <>
           <S.Header>
-            <S.Title>Choose users for payout</S.Title>
-            <Button onClick={handlePayout} disabled={selected.length === 0}>
-              <EthereumIcon/>
-              <span>Pay reward for selected</span>
-            </Button>
+            <S.Title>
+              Choose users for payout
+              {
+                isMobile && renderPayoutPointsSettings()
+              }
+            </S.Title>
+            {
+              !isMobile && redenderPayoutButton()
+            }
           </S.Header>
           <S.Content>
             <S.PayoutSetup>
@@ -158,18 +189,9 @@ const Payout = () => {
                 }
               ]}
             />
-              <S.PayoutWrapper>
-                <S.Label>1 point = </S.Label>
-                <NumberInput
-                  className="pointsValue" 
-                  value={pointsValueEth} 
-                  onChange={setPointsValueEth} 
-                  min={0.000001} 
-                  max={10} 
-                  maxLength={pointsValueEth.startsWith("0.") ? 8 : 2} 
-                />
-                <S.Label>ETH (${getUSDString(pointsValueUSD, false, 4)})</S.Label>
-                </S.PayoutWrapper>
+            {
+              !isMobile && renderPayoutPointsSettings()
+            }
             </S.PayoutSetup>
           
             
