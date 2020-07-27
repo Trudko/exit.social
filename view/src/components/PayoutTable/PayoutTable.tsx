@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 
+
 import {
-  PositionColumn,
   ScoreColumn,
   UsernameColumn,
   TOP_LEADER_COUNT
@@ -44,10 +44,6 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
           />
         )
       },
-      {
-        ...PositionColumn,
-        width: '30'
-      },
       UsernameColumn,
       ScoreColumn,
       {
@@ -88,6 +84,7 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
     ],
     [payRewardSelectionChanged]
   )
+
 
   return (
     <S.Wrapper>
