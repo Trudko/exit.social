@@ -14,7 +14,7 @@ export const Wrapper = styled.table`
     text-align: left;
 
     @media ${mediaQueries.laptop} {
-      padding: 8px 24px;
+      padding: 8px 0 8px 24px;
     }
   }
 

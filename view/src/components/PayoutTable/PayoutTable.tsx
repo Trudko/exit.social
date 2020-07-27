@@ -32,6 +32,7 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
   const columns = useMemo(
     () => [
       {
+        width: '30',
         Header: ' ',
         accessor: (props: TableProps) => (
           <Checkbox
@@ -43,7 +44,10 @@ const PayoutTable = ({ tableData, payRewardSelectionChanged }: Props) => {
           />
         )
       },
-      PositionColumn,
+      {
+        ...PositionColumn,
+        width: '30'
+      },
       UsernameColumn,
       ScoreColumn,
       {

@@ -10,7 +10,6 @@ export const TOP_LEADER_COUNT = 3
 
 export const PositionColumn = {
   Header: 'Position',
-  width: '50px',
   accessor: (props: TableProps) =>
     <S.PositionWrapper>
       <S.BadgeWrapper>
