@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { CSVLink } from 'react-csv'
 import CSS from 'csstype'
-
-import { FollowersInterface } from 'types/followers'
-import { Tabs, Input, Button, ExportIcon } from 'ui'
+import { useDebounce } from 'hooks'
+import { FollowersInterface, FollowerInterface} from 'types/followers'
+import { Tabs, Input, Button, ExportIcon, NumberInput } from 'ui'
 import { FollowersTable } from 'components'
+import { useMediaQuery } from 'react-responsive'
+import mediaQueries from "utils/mediaQueries";
 
 import * as S from './styled'
 
@@ -15,7 +17,28 @@ type Props = {
 }
 
 const DashboardContent = ({ data, className = '', style }: Props) => {
-  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [minNrFollowers, setMinNrFollowers] = useState<string>('');
+  const [followers, setFollowers] = useState<FollowerInterface[]>(data?.followers?.values);
+  const intialFollowers = data?.followers?.values;
+
+  useDebounce(() => {
+    const filteredFollowers = intialFollowers.filter((follower) => {
+      if (minNrFollowers === "") {
+        return true;
+      }
+      return follower.followersCount >= parseInt(minNrFollowers, 10);
+    }).filter((follower) => {
+      if (searchQuery === "") {
+        return true;
+      }
+      return follower.username.includes(searchQuery);
+    });
+
+    setFollowers(filteredFollowers);
+  }, 500, [minNrFollowers, searchQuery])
+
+  const isMobile = !useMediaQuery({ query: mediaQueries.laptop });
 
   return (
     <S.Wrapper className={className} style={style}>
@@ -30,24 +53,35 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
           ]}
         />
         <S.TableActions>
-          <Input
-            icon="/icons/search.svg"
-            placeholder="Search by Twitter handle"
-            value={searchQuery}
-            onChange={e => setSearchQuery(e.target.value)}
-            style={{ marginRight: '16px', width: '100%' }}
+        { !isMobile && <S.Label>Min. nr of followers</S.Label>}
+        <S.Inputs>
+          <NumberInput
+              className="nrOfFollowersInput" 
+              placeholder={!isMobile ? "" : "Min. nr of followers"}
+              value={minNrFollowers} 
+              onChange={value => setMinNrFollowers(value)}
+              min={0}
+              maxLength={7}
           />
+            <Input
+              icon="/icons/search.svg"
+              placeholder="Search by Twitter handle"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              style={{ marginRight: '16px', width: '100%' }}
+            />
+          </S.Inputs>
           {data?.followers?.values && (
             <CSVLink
-              data={data.followers.values}
+              data={followers}
               filename="exit-social_export.csv"
               onClick={() => {
-                if (data.followers?.values.length === 0) {
+                if (followers.length === 0) {
                  return false; 
                 }
               }}
             >
-              <Button buttonTheme="secondary" disabled={data.followers?.values.length === 0}>
+              <Button buttonTheme="secondary" disabled={followers.length === 0}>
                 <ExportIcon/>
                 <span>Export</span>
               </Button>
@@ -57,7 +91,7 @@ const DashboardContent = ({ data, className = '', style }: Props) => {
       </S.Header>
       <S.TableWrapper>
         <FollowersTable
-          tableData={data?.followers?.values}
+          tableData={followers}
           searchQuery={searchQuery}
         />
       </S.TableWrapper>

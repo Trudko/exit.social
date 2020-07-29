@@ -22,10 +22,10 @@ export const Header = styled.div`
   }
 
   button {
-    margin-top: 5px;
+    margin-bottom: 5px;
 
     @media ${mediaQueries.laptop} {
-      margin-top: 0px;
+      margin-bottom: 0px;
     }
 
     span {
@@ -39,18 +39,57 @@ export const Header = styled.div`
   }
 `
 
+export const Label = styled.div`
+  ${p => p.theme.fonts.label};
+  text-align: right;
+
+  @media ${mediaQueries.laptop} {
+    width: 300px;
+  }
+`
+
 export const TableWrapper = styled.div`
    overflow: auto;
 `;
 
 export const TableActions = styled.div`
   display: flex;
-  justify-content: space-between;
+  align-items: flex-end;
   margin-top: 20px;
   width: 100%;
 
   @media ${mediaQueries.laptop} {
+    align-items: center;
+  }
+
+  .nrOfFollowersInput {
+    margin-bottom: 10px;
+
+    input {
+      margin-left: 25px;
+
+      @media ${mediaQueries.laptop} {
+        margin-left: 0px;
+      }
+    }
+
+    @media ${mediaQueries.laptop} {
+      width: 100px;
+      margin: 0 10px 0 8px;
+    }
+  }
+
+  @media ${mediaQueries.laptop} {
     margin-top: 0px;
     width: initial;
+  }
+`;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media ${mediaQueries.laptop} {
+    flex-direction: row;
   }
 `;

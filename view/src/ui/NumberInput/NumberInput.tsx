@@ -37,7 +37,7 @@ const NumberInput = ({
     let value = currentTarget.value;
     const min = currentTarget.min;
     const max = currentTarget.max;
-    if (Number(value) > Number(max)) {
+    if (max && Number(value) > Number(max)) {
         value = max;
     }
 
@@ -47,7 +47,6 @@ const NumberInput = ({
 
     onChange(value);
   }
-
 
   return (
     <S.Wrapper invalid={invalid} className={className} style={style}>
