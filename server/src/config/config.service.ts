@@ -102,4 +102,16 @@ export class ConfigService {
     get sessionSecret(): string {
         return this.envConfig.SESSION_SECRET;
     }
+
+    get emailProviderKey(): string {
+        return this.envConfig.EMAIL_PROVIDER_KEY
+    }
+
+    get emailAddressFrom(): string {
+        return this.envConfig.EMAIL_ADDRESS_FROM
+    }
+
+    get confirmationTemplateID(): number {
+        return Number(this.envConfig.EMAIL_CONFIRMATION_POSTMARK_TEMPLATE_ID)
+    }
 }

@@ -10,6 +10,7 @@ import {AuthModule} from 'auth/auth.module';
 import {UserModule} from 'user/user.module';
 import {TwitterModule} from 'twitter/twitter.module';
 import {CryptoModule} from './crypto/crypto.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
     imports: [
@@ -39,7 +40,8 @@ import {CryptoModule} from './crypto/crypto.module';
         AuthModule,
         UserModule,
         TwitterModule,
-        CryptoModule
+        CryptoModule,
+        EmailModule
     ],
     controllers: [AppController],
     providers: [AppService]

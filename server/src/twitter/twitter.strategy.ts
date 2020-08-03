@@ -3,7 +3,7 @@ import {Strategy, VerifyCallback} from 'passport-twitter';
 
 import {Injectable} from '@nestjs/common';
 import {ConfigService} from 'config/config.service';
-import {UserService} from 'user/user.service';
+import {UserService, FollowResult} from 'user/user.service';
 import {LoggerService} from 'nest-logger';
 
 @Injectable()
@@ -23,8 +23,15 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
 
         try {
             if (req.session.follower) {
+                const {influencer, email} = req.session.follower;
                 const followResult = await this.userService.saveFollower(twitterProfile, token, tokenSecret, req.session.follower);
-                req.session.redirectURL = `${this.configService.viewBaseURL}/follow/${req.session.follower.influencer}/${followResult}`;
+                let redirectURL =  req.session.redirectURL = `${this.configService.viewBaseURL}/follow/${influencer}/${followResult}`;
+                if (followResult === FollowResult.Success) {
+                    redirectURL += `/${twitterProfile.screen_name}?email=${email}`;
+                }
+
+                req.session.redirectURL = redirectURL;
+               
             } else {
                 await this.userService.saveInfluencer(twitterProfile, token, tokenSecret);
             }

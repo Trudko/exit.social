@@ -5,4 +5,9 @@ export class Follower extends User {
     email: string;
     score: number;
     payoutScore: number;
+    verificationToken: string;
+    verificationTokenExpiration: Date;
+    emailVerified: boolean;
+    verified: boolean;
+    status: string;
 }

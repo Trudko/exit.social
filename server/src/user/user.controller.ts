@@ -3,9 +3,10 @@ import {UserService} from 'user/user.service';
 import {ConfigService} from 'config/config.service';
 import {AuthenticatedGuard} from 'auth/guards/authenticated.guard';
 import {User} from 'auth/decorator/user.decorator';
-import {FollowerData} from 'user/model/follower.data';
+import {Follower} from 'user/model/follower';
 import {Settings} from 'user/model/settings';
 import {Payout} from 'user/model/payout';
+import {isAfter} from "date-fns";
 
 @Controller()
 export class UserController {
@@ -84,13 +85,13 @@ export class UserController {
     @Put('influencers/:id/myself')
     @HttpCode(204)
     @UseGuards(AuthenticatedGuard)
-    async updateMyselfForInfluencer(@Param('id') influencerID: string, @User() user, @Body() data: FollowerData) {
+    async updateMyselfForInfluencer(@Param('id') influencerID: string, @User() user, @Body() data: Follower) {
         const influencer = await this.userService.getInfluencer(influencerID);
         if (!influencer) {
             throw new NotFoundException();
         }
 
-        await this.userService.updateInfluencerFollower(influencerID, user.username, data);
+        await this.userService.updateInfluencerFollower(influencerID, data);
     }
 
     @Post('payout')
@@ -98,5 +99,37 @@ export class UserController {
     @UseGuards(AuthenticatedGuard)
     async payoutFollowers(@Param('id') influencerID: string, @User() user, @Body() payouts: Payout[]) {
         await this.userService.payoutFollowers(user.username, payouts);
+    }
+
+    @Get('influencers/:influencerid/verify/:followerid')
+    @HttpCode(200)
+    async verifyFollowerEmail(@Param('influencerid') influencerID: string, @Param('followerid') followerID: string,  @Res() res, @Query() query) {
+        const influencer = await this.userService.getInfluencer(influencerID);
+        if (!influencer) {
+            res.redirect(`${this.configService.viewBaseURL}/invalidToken`);
+        }
+
+        const followers = await this.userService.getFollowers(influencerID);
+        const follower: Follower = followers.find((follower: Follower) => follower.username === followerID)
+        if (!follower || follower.verificationToken !== 
+            query.token) {
+                res.redirect(`${this.configService.viewBaseURL}/invalidToken`);
+        }
+
+        if (isAfter(new Date(), follower.verificationTokenExpiration)) {
+            res.status(400).send("token_expired");
+        }
+     
+        const followResult = await this.userService.confirmFollowerEmail(influencerID, follower);
+        const redirectURL = `${this.configService.viewBaseURL}/follow/${influencerID}/${followResult}`;
+     
+        res.redirect(redirectURL);
+    }
+
+    @Put('influencers/:influencerid/verify/:followerid')
+    @HttpCode(204)
+    @UseGuards(AuthenticatedGuard)
+    async resendEmail(@Param('influencerid') influencerID: string, @Param('followerid') followerID: string) {
+        await this.userService.sendConfirmationEmail(influencerID, followerID);
     }
 }

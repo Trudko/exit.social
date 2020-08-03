@@ -46,6 +46,12 @@ export const InfluencerSchema = new Schema({
             email: String,
             score: Number,
             verified: Boolean,
+            emailVerified: {
+                type: Boolean,
+                default: false
+            },
+            verificationToken: String,
+            verificationTokenExpiration: Date,
             payoutScore: Number,
             ethAddress: String
         }

@@ -18,4 +18,10 @@ export class FollowerDocument extends Document {
     ethAddress: string;
     @Prop()
     verified: boolean;
+    @Prop()
+    emailVerified: boolean;
+    @Prop()
+    verificationToken: string;
+    @Prop()
+    verificationTokenExpiration: Date;
 }

@@ -4,6 +4,8 @@ import {
   Dashboard,
   Follow,
   FollowSuccess,
+  FollowEmailVerification,
+  InvalidEmailToken,
   Leaderboard,
   NotFollower,
   Payout,
@@ -25,7 +27,7 @@ export default [
         component: Follow
       },
       {
-        path: '/follow/:userName/success',
+        path: '/follow/:userName/success/:followerName',
         exact: true,
         component: FollowSuccess
       },
@@ -35,9 +37,19 @@ export default [
         component: NotFollower
       },
       {
-        path: '/follow/:userName/alreadyFollower',
+        path: '/follow/:userName/alreadyFollower/:followerName',
         exact: true,
         component: FollowSuccess
+      },
+      {
+        path: '/follow/:userName/emailVerify/:followerName',
+        exact: true,
+        component: FollowEmailVerification
+      },
+      {
+        path: '/invalidToken',
+        exact: true,
+        component: InvalidEmailToken
       }
     ]
   },

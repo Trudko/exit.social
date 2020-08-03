@@ -2,19 +2,23 @@ import Twitter from 'twitter-lite';
 import {Injectable, NotFoundException} from '@nestjs/common';
 import {ConfigService} from 'config/config.service';
 import {LoggerService} from 'nest-logger';
+import {EmailService} from 'email/email.service';
 import {Model} from 'mongoose';
 import {InjectModel} from '@nestjs/mongoose';
 import {Influencer} from 'user/model/influencer';
-import {FollowerData} from 'user/model/follower.data';
+import {Follower} from 'user/model/follower';
 import {Payout} from 'user/model/payout';
 import {InfluencerDocument} from 'user/schemas/influencer-schema';
 import {FollowerDocument} from 'user/schemas/follower-schema';
 import {Settings} from 'user/model/settings';
+import {addDays, isAfter} from "date-fns";
+import { v4 as uuid } from 'uuid';
 
 export enum FollowResult {
-    Success = 'success',
+    Success = 'emailVerify',
     NotFollower = 'notFollower',
-    AlreadyFollower = 'alreadyFollower'
+    AlreadyFollower = 'alreadyFollower',
+    EmailVerified = 'success',
 }
 
 @Injectable()
@@ -22,7 +26,8 @@ export class UserService {
     constructor(
         @InjectModel('Influencer') private readonly  influencerModel: Model<InfluencerDocument>,
         private readonly configService: ConfigService,
-        private readonly loggerService: LoggerService) {
+        private readonly loggerService: LoggerService,
+        private readonly mailService: EmailService) {
     }
 
     async saveInfluencer(twitterProfile, token, tokenSecret) {
@@ -62,7 +67,10 @@ export class UserService {
             ethAddress,
             verified: twitterProfile.verified,
             score: twitterProfile.followers_count,
-            payoutScore: twitterProfile.followers_count
+            payoutScore: twitterProfile.followers_count,
+            emailVerified: false,
+            verificationTokenExpiration: addDays(new Date(), 7),
+            verificationToken: uuid()
         } as FollowerDocument;
 
         const client = new Twitter({
@@ -114,6 +122,10 @@ export class UserService {
         }
 
         this.loggerService.debug(`Follower saved to influencer: ${influencerUsername}`);
+        
+        const link = `${this.configService.serverBaseURL}${this.configService.apiPrefix}/influencers/${influencerUsername}/verify/${follower.username}?token=${follower.verificationToken}`;
+        await this.mailService.sendConfirmationEmail(follower.email, follower.username, link);
+
         return FollowResult.Success;
     }
 
@@ -142,12 +154,17 @@ export class UserService {
             username: influencerID
         });
 
-        const toFollower = ({username, email, photoURL, followersCount, verified}) => ({
+        const toFollower = ({username, email, photoURL, followersCount, verified, emailVerified, verificationToken, verificationTokenExpiration,score, payoutScore}) => ({
             username,
             email,
             photoURL,
             followersCount,
             verified,
+            emailVerified,
+            verificationToken,
+            verificationTokenExpiration,
+            score,
+            payoutScore,
             status: 'converted'
         });
 
@@ -171,15 +188,13 @@ export class UserService {
             .sort((a, b) => b.score - a.score) || [];
     }
 
-    async updateInfluencerFollower(influencerID: string, followerID: string, data: FollowerData) {
-        const {ethAddress} = data;
-
+    async  updateInfluencerFollower(influencerID: string, follower: Follower) {
         await this.influencerModel.updateOne(
             {
                 username: influencerID,
-                'followers.username': followerID
+                'followers.username': follower.username
             },
-            {$set: {'followers.$.ethAddress': ethAddress}}
+            {$set: {'followers.$': follower}}
         );
     }
 
@@ -202,6 +217,39 @@ export class UserService {
         );
     }
 
+    async sendConfirmationEmail(influencerID: string, followerID: string) {
+        const influncer = await this.influencerModel.findOne({
+            username: influencerID,
+            'followers.username': followerID
+        });
+
+        if (!influncer) {
+            return null;
+        }
+
+        const follower = influncer.followers.find((follower) => follower.username = followerID);
+       
+        if (!follower) {
+            return null;
+        }
+
+        if (isAfter(new Date(), follower.verificationTokenExpiration)) {
+            follower.verificationTokenExpiration = addDays(new Date(), 7);
+            follower.verificationToken = uuid();
+        }
+      
+        const link = `${this.configService.serverBaseURL}${this.configService.apiPrefix}/influencers/${influencerID}/verify/${followerID}?token=${follower.verificationToken}`;
+        console.log(link)
+        await this.mailService.sendConfirmationEmail(follower.email, follower.username, link);
+    }
+
+    async confirmFollowerEmail(influencerID: string, follower: Follower) {
+        follower.emailVerified = true;
+        await this.updateInfluencerFollower(influencerID, follower);
+        
+        return FollowResult.AlreadyFollower;
+    }
+    
     private async payoutFollower(influencerID: string, payout: Payout) {
         //TODO: handle after transaction completes
 

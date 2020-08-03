@@ -20,6 +20,7 @@ You can try an app at [Exit.Social](https://exit.social/)
 - [React.js](https://reactjs.org/)
 - [Styled Components](https://styled-components.com/)
 - [Typescript](https://www.typescriptlang.org/docs/tutorial.html#installing-typescript)
+- [Postmark](https://postmarkapp.com/) - for sending verification emails
 - [tmux](https://github.com/tmux/tmux/wiki/Installing) (optional - CLI start)
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) (optional) - Vagrant boxes
 - [Vagrant](https://www.vagrantup.com/downloads.html) (optional) - Vagrant boxes
@@ -32,7 +33,7 @@ You can try an app at [Exit.Social](https://exit.social/)
 don't forget to replace `DATABASE_` related properties as well. Server comes with Vagrant box for local MongoDB (so you don't have to set it up yourself). If you plan to use it, make sure [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 as well as [Vagrant](https://www.vagrantup.com/downloads.html) is installed on your system. You can use `*.sh` scripts in `server/vagrant` to manage the box or use included CLI
 for management.
-4. Copy `view/.env.development.dist` to `view/.env.development` and add or replace all relevant properties.
+4. Copy `view/.env.development.dist` to `view/.env.development` and add or replace all relevant properties. Setup [Postmark](https://postmarkapp.com/) for sending verification emails.
 5. Run `./cli.sh` as your entry point. This will run an interactive tool to help you manage the development as well as provisioning of the project.
 
 Additionally, it is also possible to run the tool with specific arguments to start specific task without the user interaction (useful for CI).

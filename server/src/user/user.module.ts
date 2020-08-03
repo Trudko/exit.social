@@ -4,6 +4,8 @@ import {InfluencerSchema} from 'user/schemas/influencer-schema';
 import {UserService} from './user.service';
 import {LoggerModule} from 'logger/logger.module';
 import {UserController} from 'user/user.controller';
+import { EmailModule } from 'email/email.module';
+import { EmailService } from 'email/email.service';
 
 @Module({
     imports: [
@@ -13,9 +15,10 @@ import {UserController} from 'user/user.controller';
                 schema: InfluencerSchema
             }
         ]),
-        LoggerModule
+        LoggerModule,
+        EmailModule
     ],
-    providers: [UserService],
+    providers: [UserService, EmailService],
     exports: [UserService],
     controllers: [UserController]
 })
