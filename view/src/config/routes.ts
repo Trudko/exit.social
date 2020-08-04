@@ -37,7 +37,7 @@ export default [
         component: NotFollower
       },
       {
-        path: '/follow/:userName/alreadyFollower/',
+        path: '/follow/:userName/alreadyFollower/:followerName',
         exact: true,
         component: FollowSuccess
       },

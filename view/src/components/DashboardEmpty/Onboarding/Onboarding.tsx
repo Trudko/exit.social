@@ -44,10 +44,12 @@ const StepContent = ({title, subTitle, activeStep, stepNumber, children}: StepPr
         {
           stepNumber <= activeStep ? 
           <S.StepWrapper>
-            <S.StepNumberWrapper>
+            <S.StepSideLine>
               {
                 activeStep === stepNumber ?
-                  <S.StepNumber>{stepNumber}</S.StepNumber>
+                  <S.StepNumberWrapper>
+                    <S.StepNumber>{stepNumber}</S.StepNumber>
+                  </S.StepNumberWrapper>
                 : <SuccessIcon/>
 
               }
@@ -56,7 +58,7 @@ const StepContent = ({title, subTitle, activeStep, stepNumber, children}: StepPr
                   <S.DividerLine/>
                 </S.DividerWrapper>
               }
-            </S.StepNumberWrapper>
+            </S.StepSideLine>
             <S.StepContent>
               <S.Title>{title}</S.Title>
               <S.SubTitle>{subTitle}</S.SubTitle>

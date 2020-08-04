@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDidUpdate } from 'react-hooks-lib'
-import { useParams } from 'react-router'
+import { useParams, useLocation } from 'react-router'
 import { useQuery } from '@apollo/client'
 import INFLUENCER_QUERY from 'apollo/queries/influencer'
 import { InfluencerInterface } from 'types/users'
@@ -10,7 +10,8 @@ import Web3 from "web3";
 import * as S from './styled'
 
 type RouteParams = {
-  userName: string
+  userName: string,
+  ref: string
 }
 
 type Form = {
@@ -20,6 +21,7 @@ type Form = {
 
 const Follow = () => {
   const params = useParams<RouteParams>()
+  const location = useLocation();
   const [form, setForm] = useState<Form>({
     email: '',
     ethAddress: ''
@@ -41,16 +43,22 @@ const Follow = () => {
       form.email
     );
     setEmailInvalid(!emailValid);
+   
+    const ref = new URLSearchParams(location.search).get('ref');
     
     const ethAddressValid = form.ethAddress.trim() === "" || Web3.utils.isAddress(form.ethAddress);
     setEthAddressInValid(!ethAddressValid);
-
+   
     if (emailValid && ethAddressValid) {
-      window.location.href = `${
-        process.env.REACT_APP_API_URL || 'http://localhost:8080/api'
-      }/influencers/${params.userName}/follow?email=${form.email}${
-        form.ethAddress ? `&ethAddress=${form.ethAddress}` : ''
-      }`
+      let redirectURL = `${process.env.REACT_APP_API_URL || 'http://localhost:8080/api'}/influencers/${params.userName}/follow?email=${form.email}`;
+      if (form.ethAddress) {
+        redirectURL += `&ethAddress=${form.ethAddress}`
+      }
+
+      if (ref) (
+        redirectURL += `&ref=${ref}`
+      )
+      window.location.href = redirectURL;
     }
   }
 

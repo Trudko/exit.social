@@ -43,15 +43,26 @@ export const DividerLine = styled.div`
   height: calc(100% - 74px);
 `;
 
-export const Actions = styled.div``;
+export const Actions = styled.div`
+  width: 280px;
+
+  @media ${mediaQueries.laptop} {
+    width: initial;
+  }
+`;
 
 export const StepWrapper = styled.div`
   display: flex;
   width: 360px;
 
+
+  svg {
+    height: 32px;
+  }
+
   @media ${mediaQueries.laptop} {
-      width: initial;
-    }
+    width: initial;
+  }
 
   textarea {
     width: 240px;
@@ -64,11 +75,12 @@ export const StepWrapper = styled.div`
 `;
 
 export const StepNumberWrapper = styled.div`
-  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+`;
 
-  svg {
-    height: 32px;
-  }
+export const StepSideLine = styled.div`
+  min-width: 56px;
   
   @media ${mediaQueries.laptop} {
     margin-right: 32px;

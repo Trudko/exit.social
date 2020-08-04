@@ -22,9 +22,9 @@ const FollowSuccess = () => {
     <Loading />
   ) : (
     <S.Wrapper>
-      <S.Title>Help share the message</S.Title>
+      <S.Title>Your email was verified</S.Title>
       <S.Description>
-        Welcome to the community, your email was verified. Grab your link and earn points! You can see the best members of our 
+        Welcome to the community. Help grow the community. By inviting other followers you are earning points! You can see the best members of our 
         <Link to={`/${params.userName}/leaderboard`}> community here</Link>
         
   
