@@ -24,4 +24,6 @@ export class FollowerDocument extends Document {
     verificationToken: string;
     @Prop()
     verificationTokenExpiration: Date;
+    @Prop()
+    referencedBy: string;
 }

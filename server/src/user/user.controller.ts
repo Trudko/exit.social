@@ -1,5 +1,5 @@
 import {Body, Controller, Get, HttpCode, NotFoundException, Param, Post, Put, Query, Req, Res, Session, UseGuards} from '@nestjs/common';
-import {UserService} from 'user/user.service';
+import {UserService, FollowResult} from 'user/user.service';
 import {ConfigService} from 'config/config.service';
 import {AuthenticatedGuard} from 'auth/guards/authenticated.guard';
 import {User} from 'auth/decorator/user.decorator';
@@ -62,7 +62,7 @@ export class UserController {
         if (!influencer) {
             throw new NotFoundException();
         }
-
+        console.log(query)
         session.follower = {
             influencer: influencerID,
             ...query
@@ -119,9 +119,15 @@ export class UserController {
         if (isAfter(new Date(), follower.verificationTokenExpiration)) {
             res.status(400).send("token_expired");
         }
+        let followResult = '';
+        if (follower.emailVerified) {
+            followResult = FollowResult.EmailVerified
+        } else {
+            followResult = await this.userService.confirmFollowerEmail(influencerID, follower);
+        }
      
-        const followResult = await this.userService.confirmFollowerEmail(influencerID, follower);
-        const redirectURL = `${this.configService.viewBaseURL}/follow/${influencerID}/${followResult}`;
+        
+        const redirectURL = `${this.configService.viewBaseURL}/follow/${influencerID}/${followResult}/${follower.username}`;
      
         res.redirect(redirectURL);
     }

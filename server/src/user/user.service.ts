@@ -55,7 +55,6 @@ export class UserService {
     }
 
     async saveFollower(twitterProfile, token, tokenSecret, followerData): Promise<FollowResult> {
-
         const followerUsername = twitterProfile.screen_name;
         const {influencer: influencerUsername, email, ethAddress, ref: referencedBy} = followerData;
 
@@ -72,6 +71,10 @@ export class UserService {
             verificationTokenExpiration: addDays(new Date(), 7),
             verificationToken: uuid()
         } as FollowerDocument;
+
+        if (referencedBy && followerUsername != referencedBy) {
+            follower.referencedBy = referencedBy
+        }
 
         const client = new Twitter({
             // eslint-disable-next-line @typescript-eslint/camelcase
@@ -116,17 +119,6 @@ export class UserService {
             }
         });
 
-        if (referencedBy && followerUsername != referencedBy) {
-            this.loggerService.debug(`Adding score to referent user - ${referencedBy}: ${follower.followersCount}`);
-            await this.influencerModel.updateOne(
-                {
-                    username: influencerUsername,
-                    'followers.username': referencedBy
-                },
-                {$inc: {'followers.$.score': follower.followersCount, 'followers.$.payoutScore': follower.followersCount}}
-            );
-        }
-
         this.loggerService.debug(`Follower saved to influencer: ${influencerUsername}`);
         
         const link = `${this.configService.serverBaseURL}${this.configService.apiPrefix}/influencers/${influencerUsername}/verify/${follower.username}?token=${follower.verificationToken}`;
@@ -160,7 +152,7 @@ export class UserService {
             username: influencerID
         });
 
-        const toFollower = ({username, email, photoURL, followersCount, verified, emailVerified, verificationToken, verificationTokenExpiration,score, payoutScore}) => ({
+        const toFollower = ({username, email, photoURL, followersCount, verified, emailVerified, verificationToken, verificationTokenExpiration,score, payoutScore, referencedBy}) => ({
             username,
             email,
             photoURL,
@@ -171,6 +163,7 @@ export class UserService {
             verificationTokenExpiration,
             score,
             payoutScore,
+            referencedBy,
             status: 'converted'
         });
 
@@ -249,6 +242,19 @@ export class UserService {
     }
 
     async confirmFollowerEmail(influencerID: string, follower: Follower) {
+       
+        const referencedBy = follower.referencedBy;
+
+        if (referencedBy && !follower.emailVerified) {
+            this.loggerService.debug(`Adding score to referent user - ${referencedBy}: ${follower.followersCount}`);
+            await this.influencerModel.updateOne(
+                {
+                    username: influencerID,
+                    'followers.username': referencedBy
+                },
+                {$inc: {'followers.$.score': follower.followersCount, 'followers.$.payoutScore': follower.followersCount}}
+            );
+        }
         follower.emailVerified = true;
         await this.updateInfluencerFollower(influencerID, follower);
         

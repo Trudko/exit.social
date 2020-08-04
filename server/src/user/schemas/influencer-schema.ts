@@ -53,7 +53,8 @@ export const InfluencerSchema = new Schema({
             verificationToken: String,
             verificationTokenExpiration: Date,
             payoutScore: Number,
-            ethAddress: String
+            ethAddress: String,
+            referencedBy: String
         }
     ]
 });

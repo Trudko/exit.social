@@ -26,10 +26,9 @@ export class TwitterStrategy extends PassportStrategy(Strategy, 'twitter') {
                 const {influencer, email} = req.session.follower;
                 const followResult = await this.userService.saveFollower(twitterProfile, token, tokenSecret, req.session.follower);
                 let redirectURL =  req.session.redirectURL = `${this.configService.viewBaseURL}/follow/${influencer}/${followResult}`;
-                if (followResult === FollowResult.EmailVerify) {
+                if (followResult === FollowResult.EmailVerify || followResult  === FollowResult.AlreadyFollower) {
                     redirectURL += `/${twitterProfile.screen_name}?email=${email}`;
                 }
-
                 req.session.redirectURL = redirectURL;
                
             } else {

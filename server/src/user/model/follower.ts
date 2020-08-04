@@ -10,4 +10,5 @@ export class Follower extends User {
     emailVerified: boolean;
     verified: boolean;
     status: string;
+    referencedBy: string;
 }
