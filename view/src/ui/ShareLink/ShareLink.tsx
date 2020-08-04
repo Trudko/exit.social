@@ -42,7 +42,7 @@ const ShareLink = ({
   const isMobile = !useMediaQuery({ query: mediaQueries.laptop })
 
   return (
-    <S.Wrapper className={className} style={style} columnOrientation={columnOrientation}>
+    <S.Wrapper className={className} style={style} columnOrientation={!isMobile && columnOrientation}>
       {label && !isMobile && <S.Label columnOrientation={columnOrientation}>{label}</S.Label>}
       {!loading && (
         <S.Value columnOrientation={columnOrientation}>

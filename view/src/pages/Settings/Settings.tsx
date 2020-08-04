@@ -52,7 +52,7 @@ const Settings = () => {
             disabled={loading}
           />
           <Checkbox
-            text="Collect Ethereum Address for payouts"
+            text="Collect Ethereum Address"
             value={allowPayout}
             onChange={selected => {setFormChanged(true); setAllowPayout(!allowPayout)}}
           />

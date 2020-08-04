@@ -17,6 +17,7 @@ export class EmailService {
     }
 
     sendConfirmationEmail(email: string, username: string, link: string) {
+        this.loggerService.debug(`sending an email to ${email} to user ${username} link ${link}`);
         this.postmarkClient.sendEmailWithTemplate({
             TemplateId:  this.templateId,
             From: this.addressFrom,

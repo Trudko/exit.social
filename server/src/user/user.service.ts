@@ -15,7 +15,7 @@ import {addDays, isAfter} from "date-fns";
 import { v4 as uuid } from 'uuid';
 
 export enum FollowResult {
-    Success = 'emailVerify',
+    EmailVerify = 'emailVerify',
     NotFollower = 'notFollower',
     AlreadyFollower = 'alreadyFollower',
     EmailVerified = 'success',
@@ -100,8 +100,14 @@ export class UserService {
             throw new NotFoundException();
         }
 
-        if (influencerDocument.followers.some(follower => follower.username == followerUsername)) {
-            return FollowResult.AlreadyFollower;
+        const existingFollower = influencerDocument.followers.find(follower => follower.username == followerUsername)
+
+        if (existingFollower) {
+            if (existingFollower.emailVerified) {
+                return FollowResult.AlreadyFollower;
+            } else { 
+                return FollowResult.EmailVerify
+            }
         }
     
         await influencerDocument.update({
@@ -126,7 +132,7 @@ export class UserService {
         const link = `${this.configService.serverBaseURL}${this.configService.apiPrefix}/influencers/${influencerUsername}/verify/${follower.username}?token=${follower.verificationToken}`;
         await this.mailService.sendConfirmationEmail(follower.email, follower.username, link);
 
-        return FollowResult.Success;
+        return FollowResult.EmailVerify;
     }
 
     async getInfluencer(username: string): Promise<Influencer> {
@@ -239,7 +245,6 @@ export class UserService {
         }
       
         const link = `${this.configService.serverBaseURL}${this.configService.apiPrefix}/influencers/${influencerID}/verify/${followerID}?token=${follower.verificationToken}`;
-        console.log(link)
         await this.mailService.sendConfirmationEmail(follower.email, follower.username, link);
     }
 

@@ -16,7 +16,7 @@ type RouteParams = {
 
 const FollowSuccess = () => {
   const params = useParams<RouteParams>()
-  const { data, loading } = useQuery<SessionInterface>(SESSION_QUERY)
+  const {loading } = useQuery<SessionInterface>(SESSION_QUERY)
 
   return loading ? (
     <Loading />

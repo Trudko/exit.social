@@ -27,7 +27,7 @@ export const Title = styled.div`
 export const Description = styled.div`
   ${p => p.theme.fonts.p1};
 
-  width: 480px;
+  max-width: 480px;
   margin-bottom: 32px;
   text-align: center;
 `
