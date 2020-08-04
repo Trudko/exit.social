@@ -2,12 +2,11 @@ import styled from 'styled-components'
 import mediaQueries from 'utils/mediaQueries';
 
 export const Wrapper = styled.div`
-  min-height: calc(100vh - 64px);
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  padding: 40px 24px;
+  padding: 40px 16px;
+
+  @media ${mediaQueries.laptop} {
+    padding: 40px 24px;
+  }
 
   > img {
     width: 56px;
@@ -47,26 +46,18 @@ export const SubTitle = styled.div`
   }
 `
 
-export const Description = styled.div`
+export const ZeroFollowers = styled.div`
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
   ${p => p.theme.fonts.p1};
   margin-bottom: 56px;
   text-align: center;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-
-  textarea {
-    max-width: 100%;
-    width: 320px;
-
-    @media ${mediaQueries.laptop} {
-      width: 560px;
-    }
-  }
-
+  
   input[type=checkbox], .label {
     margin-top: 38px;
   }
@@ -81,3 +72,4 @@ export const LinkWrapper = styled.div`
   display: flex;
   width: 100%;
 `;
+
